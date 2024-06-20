@@ -43,7 +43,7 @@ dependency_overrides:
   sensors_plus: ^4.0.2
 
 flutter_gen:
-  output: lib/src/gen/
+  output: lib/src/generated/
   integrations:
     flutter_svg: true
 

@@ -17,8 +17,7 @@ class CommonModule extends Module {
   }
 
   Future _setupCommon(GetIt sl) async {
-    final prefs = await SharedPreferences.getInstance();
-    sl.registerLazySingleton(() => AppSharedPreferences(prefs: prefs));
+    // todo add common module here
   }
 
   void _setupUI(GetIt sl) {

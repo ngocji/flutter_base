@@ -1,11 +1,12 @@
-import 'package:flutter_common/flutter_common.dart';
+import 'package:alice/alice.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_network/flutter_network.dart';
 import 'package:flutter_widget/flutter_widget.dart';
 import 'package:showslinger/src/ui/screen/home/home_screen.dart';
 import 'package:showslinger/src/ui/screen/splash/splash_screen.dart';
 
-import 'network/app_network.dart';
+import 'data/network/app_network.dart';
 
 class AppModule extends Module {
   @override
@@ -25,9 +26,8 @@ class AppModule extends Module {
   Future inject(GetIt sl) async {
     _setupNetwork(sl);
     _registerNetworkService(sl);
+    _setupDebugMode(sl);
   }
-
-
 
   void _setupNetwork(GetIt sl) {
     sl.registerLazySingleton<NetworkEnv>(() => AppNetworkEnv());
@@ -53,5 +53,16 @@ class AppModule extends Module {
       LogInterceptor(requestBody: true, responseBody: true),
       HandleErrorInterceptor(),
     ]);
+  }
+
+  void _setupDebugMode(GetIt sl) {
+    if (kDebugMode) {
+      sl.registerLazySingleton(() => Alice(
+            showNotification: false,
+            showInspectorOnShake: false,
+          ));
+      sl<Dio>().interceptors.add(sl<Alice>().getDioInterceptor());
+      sl<Alice>().setNavigatorKey(sl<NavigationService>().navigatorKey);
+    }
   }
 }

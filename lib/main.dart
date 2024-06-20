@@ -3,7 +3,6 @@ import 'package:alice/utils/shake_detector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_common/flutter_common.dart';
 import 'package:flutter_core/flutter_core.dart';
-import 'package:flutter_network/flutter_network.dart';
 import 'package:flutter_widget/flutter_widget.dart';
 import 'package:showslinger/router.dart';
 import 'package:showslinger/src/app_module.dart';
@@ -25,24 +24,11 @@ void main() async {
   ]);
   await sl<ModuleManagement>().inject(sl);
 
-  _setupDebug();
-
   // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
   //   statusBarColor: Colors.transparent, // transparent status bar
   // ));
 
   runApp(const MyApp());
-}
-
-void _setupDebug() {
-  if (kDebugMode) {
-    sl.registerLazySingleton(() => Alice(
-          showNotification: false,
-          showInspectorOnShake: false,
-        ));
-    sl<Dio>().interceptors.add(sl<Alice>().getDioInterceptor());
-    sl<Alice>().setNavigatorKey(sl<NavigationService>().navigatorKey);
-  }
 }
 
 class MyApp extends StatefulWidget {
