@@ -1,4 +1,5 @@
-import 'package:flutter_core/flutter_core.dart';
+
+import 'package:flutter_network/flutter_network.dart';
 
 class AppNetworkConfig extends NetworkConfig {
   final String apiUrl;

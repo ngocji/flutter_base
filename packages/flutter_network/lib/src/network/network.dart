@@ -1,5 +1,6 @@
-import 'package:flutter_core/src/network/network_config.dart';
-import 'package:flutter_core/src/network/network_env.dart';
+
+import 'network_config.dart';
+import 'network_env.dart';
 
 class Network<T extends NetworkConfig> {
   Env _env = Env.dev;

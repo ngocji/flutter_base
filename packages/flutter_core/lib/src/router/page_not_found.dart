@@ -1,4 +1,5 @@
-import 'package:flutter_widget/flutter_widget.dart';
+
+import 'package:flutter/material.dart';
 
 class PageNotFoundScreen extends StatelessWidget {
   const PageNotFoundScreen({Key? key}) : super(key: key);

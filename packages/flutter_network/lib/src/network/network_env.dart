@@ -1,5 +1,6 @@
-import 'package:flutter_core/src/network/network_config.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_core/flutter_core.dart';
+
+import '../../flutter_network.dart';
 
 enum Env {
   dev,

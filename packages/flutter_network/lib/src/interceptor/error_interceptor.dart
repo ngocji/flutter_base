@@ -1,7 +1,7 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_common/flutter_common.dart';
 import 'package:flutter_network/flutter_network.dart';
+
+import '../exception/api_exception.dart';
 
 class HandleErrorInterceptor extends Interceptor {
   HandleErrorInterceptor({this.errorTokenExpire});
@@ -35,7 +35,7 @@ class HandleErrorInterceptor extends Interceptor {
   }
 }
 
-extension on DioError {
+extension on DioException {
   Future<ApiException> toApiException() async {
     final errorCode = response?.statusCode ?? 0;
     final path = response?.requestOptions.uri.path ?? '';
@@ -47,7 +47,6 @@ extension on DioError {
 
     String? code;
     String? message;
-    dynamic args;
 
     try {
       final messages = ((response?.data?['messages'] ?? '[]') as List<dynamic>?)
@@ -57,7 +56,6 @@ extension on DioError {
 
       code = messages.firstOrNull?.code;
       message = messages.firstOrNull?.message;
-      args = messages.firstOrNull?.args;
     } catch (error) {
       try {
         // Handle error case for OCR

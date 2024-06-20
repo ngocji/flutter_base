@@ -1,7 +1,8 @@
-import 'package:flutter_widget/flutter_widget.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_core/src/router/page_not_found.dart';
 
 import 'navigator_util.dart';
-import 'page_not_found.dart';
 
 class DefaultRoute {
   static const String routeNotFound = '/not_found';

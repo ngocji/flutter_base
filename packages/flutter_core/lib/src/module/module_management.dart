@@ -1,10 +1,6 @@
-import 'package:flutter_common/src/router/router.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_core/flutter_core.dart';
-import 'package:flutter_widget/flutter_widget.dart';
 
-import '../router/navigator_util.dart';
-import '../router/page_not_found.dart';
-import 'module.dart';
 
 class ModuleManagement {
   final List<Module> _modules = [];
@@ -30,6 +26,7 @@ class ModuleManagement {
         return route;
       }
     }
-    return getPageRoute(const PageNotFoundScreen(), settings);
+
+    return DefaultRoute.notFound(settings);
   }
 }

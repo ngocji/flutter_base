@@ -12,7 +12,7 @@ void showDialogFail(
     pageBuilder: (BuildContext mContext, Animation<double> animation,
         Animation<double> secondaryAnimation) {
       return AppDialog.popupFail(
-        description: error.errorMessage,
+        description: error.toString(),
         callback: () {
           callback?.call();
         },
