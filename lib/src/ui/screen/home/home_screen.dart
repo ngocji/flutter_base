@@ -1,5 +1,7 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
+import '../../../generated/l10n.dart';
+
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/homeScreen';
 
@@ -13,9 +15,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      child: const Center(
-        child: Text("Home screen"),
+      color: context.color.background,
+      child: Center(
+        child: Text(Localization.current.app_name),
       ),
     );
   }

@@ -22,15 +22,16 @@ class AppTheme {
         extensions: const [
           AppTypography(
             textTheme: TextTheme(
-              displayLarge:
-                  TextStyle(fontSize: 100, color: SupportColors.textLightGray),
-              titleLarge:
-                  TextStyle(fontSize: 30, color: SupportColors.textLightGray),
-              titleMedium:
-                  TextStyle(fontSize: 20, color: SupportColors.textLightGray),
-              titleSmall:
-                  TextStyle(fontSize: 16, color: SupportColors.textLightGray),
-            ),
+                displayLarge: TextStyle(
+                    fontSize: 100, color: SupportColors.textLightGray),
+                titleLarge:
+                    TextStyle(fontSize: 30, color: SupportColors.textLightGray),
+                titleMedium:
+                    TextStyle(fontSize: 20, color: SupportColors.textLightGray),
+                titleSmall:
+                    TextStyle(fontSize: 16, color: SupportColors.textLightGray),
+                bodyMedium: TextStyle(
+                    fontSize: 14, color: SupportColors.textLightGray)),
             tabTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             textTinyRegularStyle:
                 TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
@@ -140,15 +141,16 @@ class AppTheme {
         extensions: const [
           AppTypography(
             textTheme: TextTheme(
-              displayLarge:
-                  TextStyle(fontSize: 100, color: SupportColors.textLightGray),
-              titleLarge:
-                  TextStyle(fontSize: 30, color: SupportColors.textLightGray),
-              titleMedium:
-                  TextStyle(fontSize: 20, color: SupportColors.textLightGray),
-              titleSmall:
-                  TextStyle(fontSize: 16, color: SupportColors.textLightGray),
-            ),
+                displayLarge: TextStyle(
+                    fontSize: 100, color: SupportColors.textLightGray),
+                titleLarge:
+                    TextStyle(fontSize: 30, color: SupportColors.textLightGray),
+                titleMedium:
+                    TextStyle(fontSize: 20, color: SupportColors.textLightGray),
+                titleSmall:
+                    TextStyle(fontSize: 16, color: SupportColors.textLightGray),
+                bodyMedium: TextStyle(
+                    fontSize: 14, color: SupportColors.textLightGray)),
             tabTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             textTinyRegularStyle:
                 TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
