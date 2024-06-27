@@ -25,7 +25,7 @@ class SmallAppBar extends StatelessWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       alignment: Alignment.bottomCenter,
       decoration: BoxDecoration(
-          color: context.color.background
+          color: context.color.black01
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
