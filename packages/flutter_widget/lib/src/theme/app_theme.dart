@@ -129,6 +129,7 @@ class AppTheme {
             textXsBold: GuidelineTextStyle.textXsBold,
           ),
         ],
+
       ),
     );
   }
