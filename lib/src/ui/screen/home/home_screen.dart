@@ -16,32 +16,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    sl.get<AppSharedPreferences>().set(
-        "key",
-        Contact(
-                name: "Name",
-                email: "Email",
-                city: "City",
-                mac: "mac",
-                timestamp: "",
-                creditCard: "")
-            .toEntity());
-  }
-
   void _updateContact(Contact? data) {
-    sl.get<AppSharedPreferences>().set(
-        "key",
-        Contact(
+    sl.get<AppSharedPreferences>().set("key",
+        value: Contact(
                 name: "Name ${DateTime.now().microsecond}",
                 email: "Email 1",
                 city: "City 1",
                 mac: "mac 1",
                 timestamp: "",
                 creditCard: "")
-            .toEntity(), (entity) {
+            .toEntity(), mapper: (entity) {
       return entity?.toDomain();
     });
   }
@@ -53,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: "Title",
       ),
       body: StreamBuilder<Contact?>(
-          stream: sl.get<AppSharedPreferences>().getObjectStream("key", (map) {
+          stream: sl.get<AppSharedPreferences>().getStream("key", mapper: (map) {
             var ob = ContactEntity.fromJson(map);
             return ob.toDomain();
           }),

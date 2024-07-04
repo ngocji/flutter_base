@@ -12,34 +12,38 @@ class AppSharedPreferences {
     required this.prefs,
   });
 
-  T? get<T>(String key, [T? defaultValue]) {
+  T? get<T>(String key,
+      {T? defaultValue, T Function(Map<String, dynamic>)? mapper}) {
     final value = prefs.get(key);
     if (value is T) {
       return value;
     }
 
+    final jsonString = prefs.getString(key);
+
+    if (jsonString != null) {
+      try {
+        final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+        if (mapper != null) {
+          return mapper(jsonMap);
+        } else {
+          throw Exception("Can't convert object because null mapper transform");
+        }
+      } on Exception catch (e) {
+        if (kDebugMode) print(e);
+      }
+    }
+
     return defaultValue;
   }
 
-  Stream<T?> getStream<T>(String key, [T? defaultValue]) {
+  Stream<T?> getStream<T>(String key,
+      {T? defaultValue, T Function(Map<String, dynamic>)? mapper}) {
     if (!_controllers.containsKey(key)) {
       _controllers[key] = StreamController<T?>.broadcast(
         onListen: () {
-          _controllers[key]?.add(get(key, defaultValue));
-        },
-      );
-    }
-
-    return _controllers[key]?.stream as Stream<T?>;
-  }
-
-  Stream<T?> getObjectStream<T>(
-      String key, T Function(Map<String, dynamic>) fromJson,
-      [T? defaultValue]) {
-    if (!_controllers.containsKey(key)) {
-      _controllers[key] = StreamController<T?>.broadcast(
-        onListen: () {
-          _controllers[key]?.add(getObject(key, fromJson, defaultValue));
+          _controllers[key]
+              ?.add(get(key, defaultValue: defaultValue, mapper: mapper));
         },
       );
     }
@@ -53,28 +57,13 @@ class AppSharedPreferences {
     }
   }
 
-  T? getObject<T>(String key, T Function(Map<String, dynamic>) fromJson,
-      [T? defaultValue]) {
-    final jsonString = prefs.getString(key);
-
-    if (jsonString != null) {
-      try {
-        final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-        return fromJson(jsonMap);
-      } on Exception catch (e) {
-        if (kDebugMode) print(e);
-        return defaultValue;
-      }
-    }
-    return defaultValue;
-  }
-
   bool containsKey(String key) => prefs.containsKey(key);
 
-  Future<bool> set<T, R>(String key, T? value, [R Function(T?)? map]) {
+  Future<bool> set<T, R>(String key,
+      {required T? value, R Function(T?)? mapper}) {
     if (_controllers.containsKey(key)) {
-      if (map != null) {
-        _controllers[key]?.add(map(value));
+      if (mapper != null) {
+        _controllers[key]?.add(mapper(value));
       } else {
         _controllers[key]?.add(value);
       }
