@@ -6,6 +6,7 @@ export 'package:equatable/equatable.dart';
 export 'package:get_it/get_it.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:sqflite/sqflite.dart';
+export 'package:path/path.dart';
 
 // core ext
 export 'src/extension/extentions.dart';
