@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_network/flutter_network.dart';
 import 'package:flutter_widget/flutter_widget.dart';
+import 'package:showslinger/src/data/PrimaryDatabase.dart';
 import 'package:showslinger/src/ui/screen/home/home_screen.dart';
 import 'package:showslinger/src/ui/screen/splash/splash_screen.dart';
 
@@ -25,7 +26,7 @@ class AppModule extends Module {
   @override
   Future inject(GetIt sl) async {
     _setupNetwork(sl);
-    _registerNetworkService(sl);
+    _setupDatabase(sl);
     _setupDebugMode(sl);
   }
 
@@ -37,9 +38,7 @@ class AppModule extends Module {
     Env env = sl<Network>().env;
     String baseUrl = (sl<Network>().network as AppNetworkConfig).apiUrl;
     debugPrint('env= $env baseUrl= $baseUrl');
-  }
 
-  void _registerNetworkService(GetIt sl) {
     final networkConfig = sl<Network>().network as AppNetworkConfig;
     final dioOptions = BaseOptions(
       baseUrl: networkConfig.apiUrl,
@@ -53,6 +52,10 @@ class AppModule extends Module {
       LogInterceptor(requestBody: true, responseBody: true),
       HandleErrorInterceptor(),
     ]);
+  }
+
+  void _setupDatabase(GetIt sl) {
+    sl.registerLazySingleton<PrimaryDatabase>(() => PrimaryDatabase());
   }
 
   void _setupDebugMode(GetIt sl) {

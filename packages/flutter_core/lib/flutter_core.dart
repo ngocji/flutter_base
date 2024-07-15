@@ -17,6 +17,9 @@ export 'src/usecase/mapper.dart';
 export 'src/util/app_shared_preferences.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 
+// export appdatabasehelper
+export 'src/util/app_database_helper.dart';
+
 // route and module
 export 'src/navigator/navigator_service.dart';
 export 'src/module/module.dart';
