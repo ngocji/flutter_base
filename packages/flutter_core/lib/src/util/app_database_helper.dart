@@ -13,7 +13,7 @@ class AppDatabaseHelper {
   final OnDatabaseVersionChangeFn? onDowngrade;
   final Function(Database db)? onOpen;
 
-  final Map<QueryOptions<dynamic>, StreamController<dynamic>> _controllers = {};
+  final Map<dynamic, StreamController<dynamic>> _controllers = {};
 
   AppDatabaseHelper(
       {required this.dbName,
@@ -33,14 +33,14 @@ class AppDatabaseHelper {
         onOpen: (db) => {onOpen?.call(db)});
   }
 
-  Future<Database> _getDatabase() async {
+  Future<Database> getDatabase() async {
     _database ??= await initDatabase();
     var db = _database;
     return db!;
   }
 
   Future<List<T>> query<T>(QueryOptions<T> options) async {
-    var db = await _getDatabase();
+    var db = await getDatabase();
     var list = await db.query(options.table,
         distinct: options.distinct,
         columns: options.columns,
@@ -69,7 +69,7 @@ class AppDatabaseHelper {
 
   Future<int> update(String table, Map<String, dynamic> data, String where,
       List<dynamic> whereArgs) async {
-    Database db = await _getDatabase();
+    Database db = await getDatabase();
     var id = await db.update(table, data, where: where, whereArgs: whereArgs);
     _notifyControllers(table, "update");
     return id;
@@ -77,7 +77,7 @@ class AppDatabaseHelper {
 
   Future<int> delete(String table,
       {String? where, List<dynamic>? whereArgs}) async {
-    Database db = await _getDatabase();
+    Database db = await getDatabase();
     var id = await db.delete(table, where: where, whereArgs: whereArgs);
     _notifyControllers(table, "delete");
     return id;
@@ -85,7 +85,7 @@ class AppDatabaseHelper {
 
   Future<int> insert(String table, Map<String, dynamic> data,
       {String? nullColumnHack, ConflictAlgorithm? conflictAlgorithm}) async {
-    Database db = await _getDatabase();
+    Database db = await getDatabase();
     var id = await db.insert(table, data,
         nullColumnHack: nullColumnHack,
         conflictAlgorithm: conflictAlgorithm ?? ConflictAlgorithm.replace);
