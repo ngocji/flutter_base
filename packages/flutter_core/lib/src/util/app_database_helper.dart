@@ -93,11 +93,25 @@ class AppDatabaseHelper {
     return id;
   }
 
+  Future<dynamic> batch(Function(Batch batch) action) async {
+    var db = await getDatabase();
+    var batch = db.batch();
+    action(batch);
+    _notifyAllControllers();
+    return await batch.commit(noResult: true, continueOnError: true);
+  }
+
   void _notifyControllers(String table, String action) async {
     _controllers.forEach((options, controller) {
       if (options.table == table) {
         controller.add(query(options));
       }
+    });
+  }
+
+  void _notifyAllControllers() async {
+    _controllers.forEach((options, controller) {
+      controller.add(query(options));
     });
   }
 
