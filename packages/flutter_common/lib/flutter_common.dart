@@ -10,3 +10,4 @@ export 'src/util/utils.dart';
 export 'src/widget/app_bar/small_app_bar.dart';
 export 'src/widget/widgets.dart';
 export 'src/util/url_schema_extractor.dart';
+export 'src/util/storage_service.dart';

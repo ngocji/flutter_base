@@ -1,3 +1,4 @@
+import 'package:flutter_common/src/util/storage_service.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_widget/flutter_widget.dart';
 
@@ -18,6 +19,7 @@ class CommonModule extends Module {
 
   Future _setupCommon(GetIt sl) async {
     // todo add common module here
+    sl.registerLazySingleton(() => StorageService());
   }
 
   void _setupUI(GetIt sl) {
