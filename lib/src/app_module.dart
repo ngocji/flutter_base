@@ -4,6 +4,8 @@ import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_network/flutter_network.dart';
 import 'package:flutter_widget/flutter_widget.dart';
 import 'package:showslinger/src/data/PrimaryDatabase.dart';
+import 'package:showslinger/src/data/network/ApiService.dart';
+import 'package:showslinger/src/data/network/auth_interceptor.dart';
 import 'package:showslinger/src/ui/screen/home/home_screen.dart';
 import 'package:showslinger/src/ui/screen/splash/splash_screen.dart';
 
@@ -49,9 +51,15 @@ class AppModule extends Module {
     sl.registerLazySingleton<Dio>(() => Dio(dioOptions));
     sl<Dio>().interceptors.addAll([
       CurlInterceptor(),
+      AuthInterceptor(),
       LogInterceptor(requestBody: true, responseBody: true),
-      HandleErrorInterceptor(),
+      HandleErrorInterceptor(errorTokenExpire: () {
+        // todo handle 401 token expired
+      }),
     ]);
+
+    // todo register service here
+    sl.registerLazySingleton(()=>ApiService(dio: sl.get<Dio>()));
   }
 
   void _setupDatabase(GetIt sl) {

@@ -15,7 +15,9 @@ class PrimaryDatabase {
         onOpen: (db) {});
   }
 
-  void _createDb(Database db, int version) {}
+  void _createDb(Database db, int version) {
+    // todo create tables...
+  }
 
 // todo more function query database
 }

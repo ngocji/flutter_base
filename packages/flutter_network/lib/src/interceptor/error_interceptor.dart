@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_network/flutter_network.dart';
 
-import '../exception/api_exception.dart';
-
 class HandleErrorInterceptor extends Interceptor {
   HandleErrorInterceptor({this.errorTokenExpire});
 
@@ -17,7 +15,6 @@ class HandleErrorInterceptor extends Interceptor {
     super.onRequest(options, handler);
   }
 
-
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     final apiException = await err.toApiException();
@@ -26,12 +23,11 @@ class HandleErrorInterceptor extends Interceptor {
       error = error.copyWith(response: null);
     }
 
-    /*if (apiException.statusCode == 401) {
+    if (apiException.statusCode == 401) {
       errorTokenExpire?.call();
     } else {
       handler.next(error);
-    }*/
-    handler.next(error);
+    }
   }
 }
 
@@ -70,23 +66,41 @@ extension on DioException {
 
     switch (errorCode) {
       case 400:
-        return ApiException.badRequest(path,
-            message ?? 'Localization.current.lbl_general_error', code, errorCode);
+        return ApiException.badRequest(
+            path,
+            message ?? 'Localization.current.lbl_general_error',
+            code,
+            errorCode);
       case 422:
-        return ApiException.badRequest(path,
-            message ?? 'Localization.current.lbl_general_error', code, errorCode);
+        return ApiException.badRequest(
+            path,
+            message ?? 'Localization.current.lbl_general_error',
+            code,
+            errorCode);
       case 401:
-        return ApiException.unauthorized(path,
-            message ?? 'Localization.current.lbl_general_error', code, errorCode);
+        return ApiException.unauthorized(
+            path,
+            message ?? 'Localization.current.lbl_general_error',
+            code,
+            errorCode);
       case 403:
-        return ApiException.forbidden(path,
-            message ?? 'Localization.current.lbl_general_error', code, errorCode);
+        return ApiException.forbidden(
+            path,
+            message ?? 'Localization.current.lbl_general_error',
+            code,
+            errorCode);
       case 404:
-        return ApiException.notFound(path,
-            message ?? 'Localization.current.lbl_general_error', code, errorCode);
+        return ApiException.notFound(
+            path,
+            message ?? 'Localization.current.lbl_general_error',
+            code,
+            errorCode);
       case 500:
-        return ApiException.internalServerError(path,
-            message ?? 'Localization.current.lbl_general_error', code, errorCode);
+        return ApiException.internalServerError(
+            path,
+            message ?? 'Localization.current.lbl_general_error',
+            code,
+            errorCode);
       default:
         return ApiException.noConnection(path,
             message ?? 'Localization.current.lbl_error_no_connection', '', 0);
