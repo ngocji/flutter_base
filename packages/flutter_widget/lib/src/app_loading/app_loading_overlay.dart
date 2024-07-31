@@ -52,10 +52,9 @@ Future<bool?> showLoadingOverlay(BuildContext context,
     barrierDismissible: false,
     useRootNavigator: false,
     builder: (c) {
-      return WillPopScope(
-        onWillPop: () async {
-          return dismissAble;
-        },
+      return PopScope(
+        canPop: dismissAble,
+        onPopInvoked:(o) {},
         child: buildLoading(
           true,
           bgColor: Colors.transparent,
