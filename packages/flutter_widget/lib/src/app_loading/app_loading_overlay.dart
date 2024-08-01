@@ -35,7 +35,7 @@ class _AppLoadingOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor ?? Colors.black54,
+      backgroundColor: backgroundColor ?? context.color.scrim,
       body: const AppLoading(height: 48),
     );
   }

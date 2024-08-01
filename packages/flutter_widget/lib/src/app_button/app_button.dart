@@ -1,7 +1,8 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
-
 class AppButton extends StatelessWidget {
+  static const double DEFAULT_RADIUS = 38;
+
   final AppButtonType type;
   final VoidCallback? onPressed;
   final String? pathLeft;
@@ -27,7 +28,7 @@ class AppButton extends StatelessWidget {
     this.onPressed,
     this.pathLeft,
     this.pathRight,
-    this.radius = 8,
+    this.radius = DEFAULT_RADIUS,
     this.padding = const EdgeInsets.symmetric(horizontal: 12),
     this.colorBg,
     this.colorBorder,
@@ -49,8 +50,7 @@ class AppButton extends StatelessWidget {
         ? type.bgColorDisabled(context)
         : colorBg ?? type.bgColor(context);
     final borderColor =
-    disabled ? bgColor : colorBorder ?? type.borderColor(context);
-
+        disabled ? bgColor : colorBorder ?? type.borderColor(context);
 
     return GestureDetector(
       onTap: () => disabled ? null : onPressed?.call(),
@@ -59,23 +59,24 @@ class AppButton extends StatelessWidget {
           height: height ?? type.height,
           decoration: isDecoration
               ? BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(radius),
-            border: Border.all(width: 1.5, color: borderColor),
-          )
+                  color: bgColor,
+                  borderRadius: BorderRadius.circular(radius),
+                  border: Border.all(width: 1.5, color: borderColor),
+                )
               : null,
-          child: (pathLeft != null) ? _buildContent(context)
-          : _buildContentNotImage(context)),
+          child: (pathLeft != null)
+              ? _buildContent(context)
+              : _buildContentNotImage(context)),
     );
   }
 
   Widget _buildContentNotImage(BuildContext context) {
     final labelStyle = textStyle ??
         type.labelStyle(context).copyWith(
-          color: disabled
-              ? type.labelColorDisabled(context)
-              : type.labelColor(context),
-        );
+              color: disabled
+                  ? type.labelColorDisabled(context)
+                  : type.labelColor(context),
+            );
     final isFullWidth = isLargeButton && type.isFullWidth;
     return Row(
       mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
@@ -96,10 +97,10 @@ class AppButton extends StatelessWidget {
   Widget _buildContent(BuildContext context) {
     final labelStyle = textStyle ??
         type.labelStyle(context).copyWith(
-          color: disabled
-              ? type.labelColorDisabled(context)
-              : type.labelColor(context),
-        );
+              color: disabled
+                  ? type.labelColorDisabled(context)
+                  : type.labelColor(context),
+            );
     final isFullWidth = isLargeButton && type.isFullWidth;
     return Row(
       mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
@@ -124,7 +125,6 @@ class AppButton extends StatelessWidget {
     );
   }
 
-
   Widget _buildIcon(String? path, BuildContext context) {
     return AppIcon(
       path: path ?? '',
@@ -137,11 +137,11 @@ class AppButton extends StatelessWidget {
   Widget _buildIconRight(String? path, BuildContext context) {
     return path != null
         ? AppIcon(
-      path: path,
-      width: sizeIconRight ?? 24,
-      height: sizeIconRight ?? 24,
-      color: colorIconRight,
-    )
+            path: path,
+            width: sizeIconRight ?? 24,
+            height: sizeIconRight ?? 24,
+            color: colorIconRight,
+          )
         : const SizedBox.shrink();
   }
 
@@ -173,7 +173,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     bool disabled = false,
-    double radius = 8,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.primaryLarge,
@@ -191,7 +191,7 @@ class AppButton extends StatelessWidget {
     String? pathRight,
     Color? colorIconRight,
     bool disabled = false,
-    double radius = 36,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.primaryLargeWithImage,
@@ -210,7 +210,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     bool disabled = false,
-    double radius = 8,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.secondaryLarge,
@@ -225,7 +225,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     bool disabled = false,
-    double radius = 8,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.textLarge,
@@ -240,7 +240,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     bool disabled = false,
-    double radius = 8,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.primaryMedium,
@@ -255,7 +255,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     bool disabled = false,
-    double radius = 8,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.secondaryMedium,
@@ -270,7 +270,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     bool disabled = false,
-    double radius = 8,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.textMedium,
@@ -300,7 +300,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     bool disabled = false,
-    double radius = 8,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.secondarySmall,
@@ -315,7 +315,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     bool disabled = false,
-    double radius = 8,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton._buttonByType(
       type: AppButtonType.textSmall,
@@ -325,23 +325,6 @@ class AppButton extends StatelessWidget {
       radius: radius,
     );
   }
-
-  factory AppButton.customBackground({
-    required String label,
-    VoidCallback? onPressed,
-    bool disabled = false,
-    double radius = 60,
-  }) {
-    return AppButton._buttonByType(
-      type: AppButtonType.customBackground,
-      label: label,
-      onPressed: onPressed,
-      disabled: disabled,
-      radius: radius,
-    );
-  }
-
-
 }
 
 enum AppButtonType {
@@ -403,21 +386,19 @@ enum AppButtonType {
       case AppButtonType.primaryLargeWithImage:
       case AppButtonType.primaryMedium:
       case AppButtonType.primarySmall:
-        return context.color.white;
       case AppButtonType.primaryLarge:
-        return context.color.blue;
+        return context.color.primary;
+
       case AppButtonType.secondaryLarge:
       case AppButtonType.secondaryMedium:
       case AppButtonType.secondarySmall:
-        return context.color.orange;
+        return context.color.secondaryContainer;
       case AppButtonType.textLarge:
       case AppButtonType.textMedium:
       case AppButtonType.textSmall:
         return Colors.transparent;
-      case AppButtonType.customBackground:
-        return context.color.black01;
       default:
-        return context.color.orange;
+        return context.color.tertiaryContainer;
     }
   }
 
@@ -427,17 +408,17 @@ enum AppButtonType {
       case AppButtonType.primaryLarge:
       case AppButtonType.primaryMedium:
       case AppButtonType.primarySmall:
-        return context.color.darkBlue;
+        return context.color.primary.withOpacity(40);
       case AppButtonType.secondaryLarge:
       case AppButtonType.secondaryMedium:
       case AppButtonType.secondarySmall:
-        return context.color.darkBlue;
+        return context.color.secondaryContainer.withOpacity(40);
       case AppButtonType.textLarge:
       case AppButtonType.textMedium:
       case AppButtonType.textSmall:
-        return context.color.darkBlue;
+        return Colors.transparent;
       default:
-        return context.color.darkBlue;
+        return context.color.tertiaryContainer.withOpacity(40);
     }
   }
 
@@ -446,21 +427,18 @@ enum AppButtonType {
       case AppButtonType.primaryLargeWithImage:
       case AppButtonType.primaryMedium:
       case AppButtonType.primarySmall:
-        return context.color.background;
       case AppButtonType.primaryLarge:
-        return context.color.white;
+        return context.color.onPrimary;
       case AppButtonType.secondaryLarge:
       case AppButtonType.secondaryMedium:
       case AppButtonType.secondarySmall:
-        return context.color.background;
+        return context.color.onSecondaryContainer;
       case AppButtonType.textLarge:
       case AppButtonType.textMedium:
       case AppButtonType.textSmall:
-        return context.color.background;
-      case AppButtonType.customBackground:
-        return context.color.white;
+        return context.color.primary;
       default:
-        return context.color.background;
+        return context.color.primary;
     }
   }
 
@@ -470,17 +448,17 @@ enum AppButtonType {
       case AppButtonType.primaryLarge:
       case AppButtonType.primaryMedium:
       case AppButtonType.primarySmall:
-        return context.color.borderGray;
+        return context.color.onPrimary.withOpacity(40);
       case AppButtonType.secondaryLarge:
       case AppButtonType.secondaryMedium:
       case AppButtonType.secondarySmall:
-        return context.color.borderGray;
+        return context.color.onSecondaryContainer.withOpacity(40);
       case AppButtonType.textLarge:
       case AppButtonType.textMedium:
       case AppButtonType.textSmall:
-        return context.color.borderGray;
+        return context.color.primary.withOpacity(40);
       default:
-        return context.color.borderGray;
+        return context.color.primary.withOpacity(40);
     }
   }
 
@@ -505,24 +483,6 @@ enum AppButtonType {
   }
 
   Color borderColor(BuildContext context) {
-    switch (this) {
-      case AppButtonType.primaryLargeWithImage:
-        return context.color.background;
-      case AppButtonType.primaryMedium:
-      case AppButtonType.primarySmall:
-        return context.color.blackGray;
-      case AppButtonType.primaryLarge:
-        return context.color.blue;
-      case AppButtonType.secondaryLarge:
-      case AppButtonType.secondaryMedium:
-      case AppButtonType.secondarySmall:
-        return context.color.background;
-      case AppButtonType.textLarge:
-      case AppButtonType.textMedium:
-      case AppButtonType.textSmall:
-        return Colors.transparent;
-      default:
-        return context.color.background;
-    }
+    return Colors.transparent;
   }
 }

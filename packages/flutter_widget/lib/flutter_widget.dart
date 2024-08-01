@@ -13,7 +13,6 @@ export 'src/container/card_container.dart';
 export 'src/gesture_detector/gesture_detector.dart';
 export 'src/theme/app_theme.dart';
 export 'src/theme/app_typography.dart';
-export 'src/app_scafold/app_scafold.dart';
 export 'src/space/space.dart';
 export 'src/base_state.dart';
 export 'src/base_widget.dart';

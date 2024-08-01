@@ -31,7 +31,7 @@ class AppIcon extends StatelessWidget {
             path,
             width: width,
             height: height,
-            color: color,
+            colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn),
             package: package ?? 'flutter_common',
             theme: SvgTheme(currentColor: color ?? const Color(0xFF000000)),
           );

@@ -15,85 +15,60 @@ class AppTheme {
   });
 
   factory AppTheme.light() {
+    var colorSchema = const ColorScheme(
+      primary: Color(0xFF2196F3),
+      onPrimary: Color(0xFFFFFFFF),
+      primaryContainer: Color(0xFFBBDEFB),
+      onPrimaryContainer: Color(0xFF0D47A1),
+      secondary: Color(0xFF64B5F6),
+      onSecondary: Color(0xFFFFFFFF),
+      secondaryContainer: Color(0xFFB3E5FC),
+      onSecondaryContainer: Color(0xFF01579B),
+      tertiary: Color(0xFF4DB6AC),
+      onTertiary: Color(0xFFFFFFFF),
+      tertiaryContainer: Color(0xFFB2DFDB),
+      onTertiaryContainer: Color(0xFF004D40),
+      error: Color(0xFFD32F2F),
+      onError: Color(0xFFFFFFFF),
+      errorContainer: Color(0xFFEF9A9A),
+      onErrorContainer: Color(0xFFB71C1C),
+      surface: Color(0xFFFFFFFF),
+      onSurface: Color(0xFF212121),
+      surfaceContainerLowest: Color(0xFFBDBDBD),
+      surfaceContainerLow: Color(0xFF9E9E9E),
+      surfaceContainer: Color(0xFF757575),
+      surfaceContainerHigh: Color(0xFF616161),
+      surfaceContainerHighest: Color(0xFF424242),
+      onSurfaceVariant: Color(0xFF757575),
+      outline: Color(0xFFBDBDBD),
+      outlineVariant: Color(0xFF9E9E9E),
+      shadow: Color(0xFF000000),
+      scrim: Color(0xFF000000),
+      inverseSurface: Color(0xFF303030),
+      onInverseSurface: Color(0xFFFAFAFA),
+      inversePrimary: Color(0xFF90CAF9),
+      brightness: Brightness.light,
+    );
     return AppTheme(
       data: ThemeData(
         fontFamily: _font,
         brightness: Brightness.light,
+        colorScheme: colorSchema,
+        buttonTheme: const ButtonThemeData(
+          textTheme: ButtonTextTheme.primary,
+        ),
+        textTheme: TextTheme(
+            displayLarge: TextStyle(fontSize: 100, color: colorSchema.primary),
+            titleLarge: TextStyle(fontSize: 30, color: colorSchema.primary),
+            titleMedium:
+                TextStyle(fontSize: 20, color: colorSchema.onSecondary),
+            titleSmall: TextStyle(fontSize: 16, color: colorSchema.onTertiary),
+            bodyMedium: TextStyle(fontSize: 14, color: colorSchema.onSurface),
+            bodySmall:
+                TextStyle(fontSize: 12, color: colorSchema.onSurfaceVariant)),
         extensions: const [
-          AppTypography(
-            textTheme: TextTheme(
-                displayLarge: TextStyle(
-                    fontSize: 100, color: SupportColors.textLightGray),
-                titleLarge:
-                    TextStyle(fontSize: 30, color: SupportColors.textLightGray),
-                titleMedium:
-                    TextStyle(fontSize: 20, color: SupportColors.textLightGray),
-                titleSmall:
-                    TextStyle(fontSize: 16, color: SupportColors.textLightGray),
-                bodyMedium: TextStyle(
-                    fontSize: 14, color: SupportColors.textLightGray)),
-            tabTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-            textTinyRegularStyle:
-                TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-            textTinyMediumStyle:
-                TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-            textTinySemiBoldStyle:
-                TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-            textTinyBoldStyle:
-                TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
-            textSmallRegularStyle:
-                TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-            textSmallMediumStyle:
-                TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            textSmallSemiBoldStyle:
-                TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-            textSmallBoldStyle:
-                TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-            textNormalRegularStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-            textNormalMediumStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            textNormalSemiBoldStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            textNormalBoldStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-            textLargeRegularStyle:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-            textLargeMediumStyle:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-            textLargeSemiBoldStyle:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-            textLargeBoldStyle:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-          ),
-          GuidelineColor(
-            colorSold: SupportColors.colorSold,
-            colorAttendee: SupportColors.colorAttendee,
-            colorScanned: SupportColors.colorScanned,
-            colorError: SupportColors.colorError,
-            colorText: SupportColors.colorText,
-            colorText01: SupportColors.colorText01,
-            blue: SupportColors.blue,
-            black: SupportColors.black,
-            black01: SupportColors.black01,
-            white: SupportColors.white,
-            green: SupportColors.green,
-            red: SupportColors.red,
-            colorIcon: SupportColors.colorIcon,
-            primaryColor: SupportColors.primaryColor,
-            backgroundField: SupportColors.backgroundField,
-            colorTextField: SupportColors.colorTextField,
-            colorAccent: SupportColors.colorAccent,
-            headerColor: SupportColors.headerColor,
-            background: SupportColors.background,
-            backgroundCard: SupportColors.backgroundCard,
-            blackGray: SupportColors.blackGray,
-            lightGray: SupportColors.lightGray,
-            borderGray: SupportColors.borderGray,
-            orange: SupportColors.orange,
-            darkBlue: SupportColors.darkBlue,
-            secondaryColor: SupportColors.secondaryColor,
-          ),
+          AppTypography(),
+          GuidelineColor(),
           GuidelineTypography(
             displayMdRegular: GuidelineTextStyle.displayMdRegular,
             displayMdMedium: GuidelineTextStyle.displayMdMedium,
@@ -129,91 +104,62 @@ class AppTheme {
             textXsBold: GuidelineTextStyle.textXsBold,
           ),
         ],
-
       ),
     );
   }
 
   factory AppTheme.dark() {
+    var colorSchema = const ColorScheme(
+      primary: Color(0xFF2196F3),
+      onPrimary: Color(0xFFFFFFFF),
+      primaryContainer: Color(0xFF90CAF9),
+      onPrimaryContainer: Color(0xFF0D47A1),
+      secondary: Color(0xFF64B5F6),
+      onSecondary: Color(0xFFFFFFFF),
+      secondaryContainer: Color(0xFFBBDEFB),
+      onSecondaryContainer: Color(0xFF01579B),
+      tertiary: Color(0xFF4DB6AC),
+      onTertiary: Color(0xFFFFFFFF),
+      tertiaryContainer: Color(0xFF80CBC4),
+      onTertiaryContainer: Color(0xFF004D40),
+      error: Color(0xFFD32F2F),
+      onError: Color(0xFFFFFFFF),
+      errorContainer: Color(0xFFEF9A9A),
+      onErrorContainer: Color(0xFFB71C1C),
+      surface: Color(0xFF121212),
+      onSurface: Color(0xFFFFFFFF),
+      surfaceContainerLowest: Color(0xFF9E9E9E),
+      surfaceContainerLow: Color(0xFF757575),
+      surfaceContainer: Color(0xFF616161),
+      surfaceContainerHigh: Color(0xFF424242),
+      surfaceContainerHighest: Color(0xFF303030),
+      onSurfaceVariant: Color(0xFFD4D4D4),
+      outline: Color(0xFFBDBDBD),
+      outlineVariant: Color(0xFF9E9E9E),
+      shadow: Color(0xFF000000),
+      scrim: Color(0xFF000000),
+      inverseSurface: Color(0xFFFAFAFA),
+      onInverseSurface: Color(0xFF303030),
+      inversePrimary: Color(0xFFBBDEFB),
+      brightness: Brightness.dark,
+    );
     return AppTheme(
       data: ThemeData(
         fontFamily: _font,
         brightness: Brightness.dark,
+        colorScheme: colorSchema,
+        textTheme: TextTheme(
+            displayLarge: TextStyle(fontSize: 100, color: colorSchema.primary),
+            titleLarge: TextStyle(fontSize: 30, color: colorSchema.primary),
+            titleMedium:
+            TextStyle(fontSize: 20, color: colorSchema.onSecondary),
+            titleSmall: TextStyle(fontSize: 16, color: colorSchema.onTertiary),
+            bodyMedium: TextStyle(fontSize: 14, color: colorSchema.onSurface),
+            bodySmall:
+            TextStyle(fontSize: 12, color: colorSchema.onSurfaceVariant)),
         extensions: const [
-          AppTypography(
-            textTheme: TextTheme(
-                displayLarge: TextStyle(
-                    fontSize: 100, color: SupportColors.textLightGray),
-                titleLarge:
-                    TextStyle(fontSize: 30, color: SupportColors.textLightGray),
-                titleMedium:
-                    TextStyle(fontSize: 20, color: SupportColors.textLightGray),
-                titleSmall:
-                    TextStyle(fontSize: 16, color: SupportColors.textLightGray),
-                bodyMedium: TextStyle(
-                    fontSize: 14, color: SupportColors.textLightGray)),
-            tabTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-            textTinyRegularStyle:
-                TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-            textTinyMediumStyle:
-                TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-            textTinySemiBoldStyle:
-                TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-            textTinyBoldStyle:
-                TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
-            textSmallRegularStyle:
-                TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-            textSmallMediumStyle:
-                TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            textSmallSemiBoldStyle:
-                TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-            textSmallBoldStyle:
-                TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-            textNormalRegularStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-            textNormalMediumStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            textNormalSemiBoldStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            textNormalBoldStyle:
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-            textLargeRegularStyle:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-            textLargeMediumStyle:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-            textLargeSemiBoldStyle:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-            textLargeBoldStyle:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-          ),
-          GuidelineColor(
-            colorSold: SupportColors.colorSold,
-            colorAttendee: SupportColors.colorAttendee,
-            colorScanned: SupportColors.colorScanned,
-            colorText: SupportColors.colorText,
-            headerColor: SupportColors.headerColorDark,
-            colorText01: SupportColors.colorText01,
-            colorError: SupportColors.colorError,
-            colorIcon: SupportColors.colorIcon,
-            backgroundCard: SupportColors.backgroundCardDark,
-            blue: SupportColors.blue,
-            black: SupportColors.black,
-            black01: SupportColors.black01,
-            white: SupportColors.white,
-            green: SupportColors.green,
-            backgroundField: SupportColors.backgroundFieldDark,
-            colorTextField: SupportColors.colorTextFieldDark,
-            primaryColor: SupportColors.primaryColor,
-            colorAccent: SupportColors.colorAccent,
-            background: SupportColors.backgroundDark,
-            blackGray: SupportColors.blackGray,
-            lightGray: SupportColors.lightGray,
-            borderGray: SupportColors.borderGray,
-            orange: SupportColors.orange,
-            red: SupportColors.red,
-            darkBlue: SupportColors.darkBlue,
-            secondaryColor: SupportColors.secondaryColor,
-          ),
+          AppTypography(),
+          GuidelineColor(),
           GuidelineTypography(
             displayMdRegular: GuidelineTextStyle.displayMdRegular,
             displayMdMedium: GuidelineTextStyle.displayMdMedium,
@@ -255,12 +201,14 @@ class AppTheme {
 }
 
 extension ThemeContext on BuildContext {
-  GuidelineColor get color => Theme.of(this).extension<GuidelineColor>()!;
+  ColorScheme get color => Theme.of(this).colorScheme;
+
+  GuidelineColor get colorExtend =>
+      Theme.of(this).extension<GuidelineColor>()!;
 
   GuidelineTypography get textStyle =>
       Theme.of(this).extension<GuidelineTypography>()!;
 
-  @Deprecated('Remove, use textStyle instead')
-  AppTypography get legacyTextStyle =>
-      Theme.of(this).extension<AppTypography>()!;
+  TextTheme get textTheme =>
+      Theme.of(this).textTheme;
 }

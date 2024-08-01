@@ -42,10 +42,10 @@ class CardContainer extends StatelessWidget {
         width: MediaQuery.sizeOf(context).width,
         padding: padding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
-          color: context.color.backgroundCard,
+          color: context.color.surface,
           border: Border.all(
             width: 1,
-            color: context.color.backgroundCard,
+            color: context.color.outline,
           ),
           borderRadius: BorderRadius.circular(4),
         ),
