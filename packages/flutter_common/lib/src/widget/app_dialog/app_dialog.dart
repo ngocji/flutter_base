@@ -79,23 +79,13 @@ class AppDialog extends StatelessWidget {
                           ? Row(
                               children: [
                                 btNoName != null
-                                    ? Flexible(
-                                        child: AppButton.primaryLarge(
-                                            onPressed: () {
-                                              callbackNoAction?.call();
-                                            },
-                                            label: btNoName!))
+                                    ? Flexible(child: SizedBox())
                                     : const SizedBox.shrink(),
                                 btNoName != null
                                     ? Space.w12()
                                     : const SizedBox.shrink(),
                                 Flexible(
-                                  child: AppButton.primaryLarge(
-                                      onPressed: () {
-                                        callback?.call();
-                                        Navigator.maybePop(context);
-                                      },
-                                      label: btYesName ?? 'Yes'),
+                                  child: SizedBox(),
                                 ),
                               ],
                             )

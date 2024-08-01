@@ -105,7 +105,11 @@ class AppButton extends StatelessWidget {
       case AppButtonIconGravity.textStart:
         return [_buildIcon(iconPath), Space.w12(), _buildText(context)];
       case AppButtonIconGravity.textEnd:
-        return [ _buildText(context), Space.w12(), _buildIcon(iconPath),];
+        return [
+          _buildText(context),
+          Space.w12(),
+          _buildIcon(iconPath),
+        ];
       default:
         return [];
     }
@@ -147,24 +151,25 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  factory AppButton._buttonByType({
-    required AppButtonType type,
+  factory AppButton.primary({
     required String label,
     VoidCallback? onPressed,
-    String? pathLeft,
-    String? pathRight,
+    String? icon,
     double? sizeIcon,
-    Color? colorIconRight,
     bool disabled = false,
-    double radius = 8,
+    AppButtonIconGravity? iconGravity,
+    double radius = DEFAULT_RADIUS,
   }) {
     return AppButton(
-      type: type,
+      type: AppButtonType.primary,
       label: label,
+      iconPath: icon,
+      iconGravity: iconGravity ?? AppButtonIconGravity.textStart,
       onPressed: onPressed,
       disabled: disabled,
       sizeIcon: sizeIcon,
       radius: radius,
+      isLargeButton: true,
     );
   }
 }
