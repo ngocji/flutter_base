@@ -1,7 +1,22 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
 class AppEmptyWidget extends StatelessWidget {
-  const AppEmptyWidget({Key? key}) : super(key: key);
+  final IconData? icon;
+  final String? iconPath;
+  final String? iconPackageName;
+  final double? iconSize;
+  final Color? iconColor;
+  final String? emptyLabel;
+
+  const AppEmptyWidget(
+      {Key? key,
+      this.icon,
+      this.iconPath,
+      this.iconPackageName,
+      this.iconSize = 64,
+      this.iconColor,
+      this.emptyLabel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,16 +25,23 @@ class AppEmptyWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
-            Icons.folder,
-            size: 64,
-            color: context.color.background,
-          ),
+          icon != null
+              ? Icon(icon,
+                  color: iconColor ?? Colors.transparent, size: iconSize ?? 64)
+              : iconPath != null
+                  ? AppIcon(
+                      path: iconPath!,
+                      package: iconPackageName,
+                      width: iconSize ?? 64,
+                      height: iconSize ?? 64,
+                      color: iconColor ?? Colors.transparent,
+                    )
+                  : const SizedBox.shrink(),
           Space.h4(),
           Text(
-            'Không có dữ liệu',
-            style: context.textStyle.textMdRegular
-                .copyWith(color: context.color.background),
+            emptyLabel ?? "Empty!",
+            style: context.textTheme.bodyMedium
+                ?.copyWith(color: context.color.inverseSurface),
           ),
         ],
       ),

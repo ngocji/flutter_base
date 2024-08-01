@@ -23,7 +23,7 @@ class AppListTile extends StatelessWidget {
       this.colorPrefixIcon,
       this.isMultiLine = true,
       this.centerAlign = false,
-      this.iconType = IconType.SMALL,
+      this.iconType = IconType.small,
       this.title,
       this.titleStyle,
       this.paddingPrefix,
@@ -77,7 +77,7 @@ class AppListTile extends StatelessWidget {
       description ?? '',
       style: descriptionStyle ??
           context.textStyle.textMdMedium
-              .copyWith(color: context.color.colorTextField, fontSize: 14),
+              .copyWith(color: context.color.onSurface, fontSize: 14),
     );
   }
 
@@ -120,13 +120,13 @@ class AppListTile extends StatelessWidget {
         paddingPrefix: const EdgeInsets.fromLTRB(0, 3, 8, 0),
         title: title,
         titleStyle: context.textStyle.textMdBold
-            .copyWith(fontSize: 24, color: context.color.headerColor),
+            .copyWith(fontSize: 24, color: context.color.primary),
         description: description,
         descriptionStyle: context.textStyle.textSmallRegular
-            .copyWith(fontSize: 14, color: context.color.headerColor),
+            .copyWith(fontSize: 14, color: context.color.primary),
         prefixIcon: prefix,
-        colorPrefixIcon: context.color.headerColor,
-        iconType: IconType.SMALL,
+        colorPrefixIcon: context.color.primary,
+        iconType: IconType.small,
         centerAlign: true,
       );
 
@@ -149,7 +149,7 @@ class AppListTile extends StatelessWidget {
       AppListTile(
         paddingPrefix: const EdgeInsets.fromLTRB(0, 3, 8, 0),
         title: title,
-        iconType: iconType ?? IconType.MEDIUM,
+        iconType: iconType ?? IconType.medium,
         prefixIcon: prefix,
         suffixIcon: suffixIcon,
         centerAlign: true,
@@ -158,12 +158,12 @@ class AppListTile extends StatelessWidget {
 
   Widget _buildIconPrefix(IconType type) {
     switch (type) {
-      case IconType.XSMALL:
+      case IconType.xsmall:
         return AppIcon.icon16(
           path: prefixIcon ?? '',
           color: colorPrefixIcon,
         );
-      case IconType.SMALL:
+      case IconType.small:
         return SizedBox(
           width: 14,
           height: 22,
@@ -172,12 +172,12 @@ class AppListTile extends StatelessWidget {
             color: colorPrefixIcon,
           ),
         );
-      case IconType.MEDIUM:
+      case IconType.medium:
         return AppIcon.icon32(
           path: prefixIcon ?? '',
           color: colorPrefixIcon,
         );
-      case IconType.LARGE:
+      case IconType.large:
         return AppIcon.icon56(
           path: prefixIcon ?? '',
           color: colorPrefixIcon,
@@ -191,7 +191,7 @@ class AppListTile extends StatelessWidget {
       title ?? '',
       style: titleStyle ??
           context.textStyle.textMdMedium
-              .copyWith(color: context.color.colorTextField, fontSize: 14),
+              .copyWith(color: context.color.onSurface, fontSize: 14),
     );
   }
 
@@ -202,4 +202,4 @@ class AppListTile extends StatelessWidget {
   }
 }
 
-enum IconType { XSMALL, SMALL, MEDIUM, LARGE }
+enum IconType { xsmall, small, medium, large }

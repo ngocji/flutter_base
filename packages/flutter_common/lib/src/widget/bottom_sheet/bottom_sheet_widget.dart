@@ -15,20 +15,15 @@ class BottomSheetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(children: [
       Container(
-        padding: EdgeInsets.only(bottom: MediaQuery
-            .of(context)
-            .padding
-            .bottom),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         constraints: BoxConstraints(
-            maxHeight: height ?? MediaQuery
-                .sizeOf(context)
-                .height * 3 / 4),
+            maxHeight: height ?? MediaQuery.sizeOf(context).height * 3 / 4),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),
           ),
-          color: context.color.white,
+          color: context.color.surface,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -49,15 +44,17 @@ class BottomSheetHeaderWrapper extends StatelessWidget {
   final String title;
   final Widget child;
   final bool showHeader;
+  final bool showDivider;
   final VoidCallback? callback;
 
-  const BottomSheetHeaderWrapper({
-    Key? key,
-    this.title = '',
-    this.callback,
-    required this.child,
-    this.showHeader = true,
-  }) : super(key: key);
+  const BottomSheetHeaderWrapper(
+      {Key? key,
+      this.title = '',
+      this.callback,
+      required this.child,
+      this.showHeader = true,
+      this.showDivider = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,40 +63,44 @@ class BottomSheetHeaderWrapper extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Space.h8(),
-        showHeader ? Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Space.w36(),
-            Expanded(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: context.textStyle.textMdBold.copyWith(
-                  color: context.color.black01,
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () =>
-              {
-                if (callback != null ) {
-                  callback?.call()
-                } else
-                  {
-                    Navigator.pop(context),
-                  }
-              },
-              child: const Icon(
-                Icons.close,
-                color: Colors.white,
-                size: 24,
-              ),
-            ),
-            Space.w12(),
-          ],
-        ): const SizedBox.shrink(),
-        showHeader ?Space.h16(): const SizedBox.shrink(),
-        showHeader ? Divider(thickness: 1, height: 1, color: context.color.borderGray.withOpacity(0.2),): const SizedBox.shrink(),
+        showHeader
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Space.w36(),
+                  Expanded(
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: context.textStyle.textMdBold.copyWith(
+                        color: context.color.onSurface,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => {
+                      if (callback != null)
+                        {callback?.call()}
+                      else
+                        {
+                          Navigator.pop(context),
+                        }
+                    },
+                    child: Icon(
+                      Icons.close,
+                      color: context.color.onSurface.withOpacity(80),
+                      size: 24,
+                    ),
+                  ),
+                  Space.w12(),
+                ],
+              )
+            : const SizedBox.shrink(),
+        showHeader ? Space.h16() : const SizedBox.shrink(),
+        showHeader && showDivider
+            ? Divider(
+                thickness: 1, height: 1, color: context.color.onSurfaceVariant)
+            : const SizedBox.shrink(),
         Expanded(
           child: child,
         ),
@@ -123,9 +124,7 @@ Future<T?> showCustomBottomSheet<T>({
     enableDrag: enableDrag,
     builder: (BuildContext bc) {
       return Padding(
-        padding: MediaQuery
-            .of(bc)
-            .viewInsets,
+        padding: MediaQuery.of(bc).viewInsets,
         child: BottomSheetWidget(
           height: height,
           child: child,
@@ -142,6 +141,7 @@ Future<T?> showCustomBottomSheetWithIcon<T>({
   final VoidCallback? callback,
   required String title,
   bool showHeader = true,
+  bool showDivider = true,
   bool isDismissible = true,
   bool enableDrag = true,
 }) {
@@ -153,13 +153,15 @@ Future<T?> showCustomBottomSheetWithIcon<T>({
     enableDrag: enableDrag,
     builder: (BuildContext bc) {
       return Padding(
-        padding: MediaQuery
-            .of(bc)
-            .viewInsets,
+        padding: MediaQuery.of(bc).viewInsets,
         child: BottomSheetWidget(
           height: height,
-          child: BottomSheetHeaderWrapper(title: title, child: child,
-              callback: callback, showHeader: showHeader),
+          child: BottomSheetHeaderWrapper(
+              title: title,
+              callback: callback,
+              showHeader: showHeader,
+              showDivider: showDivider,
+              child: child),
         ),
       );
     },

@@ -171,16 +171,22 @@ class _AppInputFieldState extends State<AppInputField> {
       builder: (context, hasFocus, _) {
         if (hasFocus || _hasValue) {
           TextStyle style = context.textStyle.textXsRegular.copyWith(
-            color: context.color.colorTextField,
+            color: context.color.onSurface,
           );
+
+          TextStyle? requireTextStyle = widget.required
+              ? context.textStyle.textXsBold.copyWith(
+                  color: context.color.error,
+                )
+              : null;
+
           return RichText(
             text: TextSpan(
               text: widget.title,
               style: style,
               children: [
                 if (widget.required)
-                  TextSpan(
-                      text: ' *',),
+                  TextSpan(text: ' *', style: requireTextStyle),
               ],
             ),
           );
@@ -209,8 +215,8 @@ class _AppInputFieldState extends State<AppInputField> {
               style: widget.textInputStyle ??
                   context.textStyle.textSmallSemiBold.copyWith(
                     color: widget.readOnly
-                        ? context.color.colorTextField
-                        : context.color.colorTextField,
+                        ? context.color.onSurface
+                        : context.color.onSurface,
                   ),
               keyboardType: widget.keyboardType,
               onFieldSubmitted: widget.onFieldSubmitted,
@@ -233,13 +239,13 @@ class _AppInputFieldState extends State<AppInputField> {
 
     String hint = widget.title;
     TextStyle hintStyle = context.textStyle.textSmallRegular.copyWith(
-      color: context.color.colorTextField,
+      color: context.color.onSurface,
     );
     if (_focusNode.hasFocus || _hasValue) {
       hint = widget.hint ?? widget.title;
       hintStyle = widget.hintStyle ??
           context.textStyle.textSmallSemiBold.copyWith(
-            color: context.color.colorTextField,
+            color: context.color.onSurface,
           );
     }
 
@@ -266,7 +272,7 @@ class _AppInputFieldState extends State<AppInputField> {
         padding: const EdgeInsets.only(right: 8),
         child: AppIcon.icon20(
           path: widget.prefixIcon!,
-          color: context.color.colorIcon,
+          color: context.color.primaryFixed,
         ),
       );
     }
@@ -281,7 +287,7 @@ class _AppInputFieldState extends State<AppInputField> {
     } else if (widget.suffixIcon != null && widget.suffixIcon!.isNotEmpty) {
       suffix = AppIcon.icon20(
         path: widget.suffixIcon!,
-        color: context.color.colorIcon,
+        color: context.color.primaryFixed,
       );
     }
 
@@ -332,7 +338,7 @@ class _AppInputFieldState extends State<AppInputField> {
         child: Text(
           widget.errorMessage!,
           style: context.textStyle.textXsMedium.copyWith(
-            color: Colors.red,
+            color: context.color.error,
           ),
         ),
       );

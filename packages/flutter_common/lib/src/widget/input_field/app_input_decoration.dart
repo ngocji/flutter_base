@@ -7,11 +7,12 @@ class AppInputDecoration {
       borderRadius: BorderRadius.circular(8),
       border: Border.all(
           color: error
-              ? context.color.colorError
+              ? context.color.errorContainer
               : hasFocus
-                  ? context.color.backgroundField
-                  : context.color.backgroundField),
-      color: disabled ? context.color.backgroundField : context.color.backgroundField,
+                  ? context.color.primary
+                  : context.color.outline),
+      color:
+          disabled ? context.color.surfaceContainerLowest : Colors.transparent,
       boxShadow: const [
         BoxShadow(
           color: Color(0x0C000000),
