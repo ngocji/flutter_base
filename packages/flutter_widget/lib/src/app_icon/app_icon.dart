@@ -7,7 +7,6 @@ class AppIcon extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? color;
-  final double fontSize;
 
   const AppIcon({
     Key? key,
@@ -15,8 +14,7 @@ class AppIcon extends StatelessWidget {
     this.package,
     this.width,
     this.height,
-    this.color,
-    this.fontSize = 14,
+    this.color
   }) : super(key: key);
 
   @override
