@@ -159,6 +159,9 @@ class AppButton extends StatelessWidget {
     bool disabled = false,
     AppButtonIconGravity? iconGravity,
     double radius = DEFAULT_RADIUS,
+    bool isLargeButton = true,
+    EdgeInsets? padding,
+    TextStyle? textStyle
   }) {
     return AppButton(
       type: AppButtonType.primary,
@@ -169,7 +172,34 @@ class AppButton extends StatelessWidget {
       disabled: disabled,
       sizeIcon: sizeIcon,
       radius: radius,
-      isLargeButton: true,
+      isLargeButton: isLargeButton,
+      padding: padding,
+      textStyle: textStyle,
+    );
+  }
+
+  factory AppButton.text({
+    required String label,
+    VoidCallback? onPressed,
+    String? icon,
+    double? sizeIcon,
+    bool disabled = false,
+    AppButtonIconGravity? iconGravity,
+    bool isLargeButton = false,
+    EdgeInsets? padding,
+    TextStyle? textStyle
+  }) {
+    return AppButton(
+      type: AppButtonType.text,
+      label: label,
+      iconPath: icon,
+      iconGravity: iconGravity ?? AppButtonIconGravity.textStart,
+      onPressed: onPressed,
+      disabled: disabled,
+      sizeIcon: sizeIcon,
+      isLargeButton: isLargeButton,
+      padding: padding,
+      textStyle: textStyle,
     );
   }
 }

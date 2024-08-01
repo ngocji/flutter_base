@@ -18,7 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
           title: "Title",
         ),
         body: Center(
-          child: AppButton.primary(label: "Button"),
+          child: AppButton.primary(
+            label: "Button",
+            onPressed: () {
+              showDialogFail(context, Exception(), () {});
+            },
+          ),
         ));
   }
 }

@@ -77,15 +77,29 @@ class AppDialog extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: showButtonBottom
                           ? Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 btNoName != null
-                                    ? Flexible(child: SizedBox())
+                                    ? AppButton.text(
+                                        label: btNoName!,
+                                        textStyle: context.textTheme.bodyMedium?.copyWith(color: context.color.onSurfaceVariant),
+                                        onPressed: () {
+                                          Navigator.maybePop(context);
+                                        },
+                                      )
                                     : const SizedBox.shrink(),
                                 btNoName != null
-                                    ? Space.w12()
+                                    ? Space.w20()
                                     : const SizedBox.shrink(),
-                                Flexible(
-                                  child: SizedBox(),
+                                AppButton.primary(
+                                  label: btYesName ?? "Ok",
+                                  isLargeButton: false,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30),
+                                  onPressed: () {
+                                    Navigator.maybePop(context);
+                                  },
                                 ),
                               ],
                             )
@@ -95,11 +109,14 @@ class AppDialog extends StatelessWidget {
               ),
               showButtonClose
                   ? Positioned(
-                      top: -15,
-                      right: -15,
-                      child: SizedBox(
+                      top: -10,
+                      right: -10,
+                      child: Container(
                         width: 24.0,
                         height: 24.0,
+                        decoration: BoxDecoration(
+                            color: context.color.surface,
+                            shape: BoxShape.circle),
                         child: Icon(
                           Icons.close,
                           color: context.color.onSurfaceVariant,
@@ -117,9 +134,10 @@ class AppDialog extends StatelessWidget {
           {required String description, VoidCallback? callback}) =>
       AppDialog(
           callback: callback,
-          iconPath: '',
           title: 'Localization.current.lbl_error',
-          showButtonBottom: false,
+          showButtonBottom: true,
+          btYesName: "Ok",
+          btNoName: "Cancel",
           showButtonClose: true,
           description: description);
 }

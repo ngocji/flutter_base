@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' as m;
+import 'package:flutter_widget/flutter_widget.dart';
 
 class GestureDetector extends m.StatelessWidget {
   final m.VoidCallback? onTap;
@@ -14,8 +15,9 @@ class GestureDetector extends m.StatelessWidget {
 
   @override
   m.Widget build(m.BuildContext context) {
-    return m.GestureDetector(
-      behavior: m.HitTestBehavior.opaque,
+    return m.InkWell(
+      radius: 38,
+      highlightColor: context.color.onPrimary,
       onTap: onTap,
       onTapDown: onTapDown,
       child: child,
