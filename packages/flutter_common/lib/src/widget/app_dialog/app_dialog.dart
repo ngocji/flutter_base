@@ -1,31 +1,27 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
-import '../../../flutter_common.dart';
-
 class AppDialog extends StatelessWidget {
-  final String? path;
+  final String? iconPath;
   final Widget? icon;
-  final String title;
+  final String? title;
   final String description;
   final String? btNoName;
   final String? btYesName;
-  final bool showBtClose;
+  final bool showButtonClose;
   final bool showButtonBottom;
   final VoidCallback? callback;
   final VoidCallback? callbackNoAction;
-  final bool isMoreButton;
 
   const AppDialog(
       {super.key,
-      this.path,
+      this.iconPath,
       this.btNoName,
       this.btYesName,
       this.icon,
-      this.showBtClose = false,
+      this.showButtonClose = false,
       this.showButtonBottom = true,
-      required this.title,
+      this.title,
       required this.description,
-      this.isMoreButton = false,
       this.callbackNoAction,
       this.callback});
 
@@ -33,12 +29,12 @@ class AppDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (showBtClose) {
+        if (showButtonClose) {
           Navigator.maybePop(context);
         }
       },
       child: Dialog(
-          backgroundColor: context.color.lightGray,
+          backgroundColor: context.color.surface,
           elevation: 0.0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: Stack(
@@ -49,54 +45,48 @@ class AppDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: 12),
-                    decoration: const BoxDecoration(
-                      color: Color.fromRGBO(246, 255, 249, 1),
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(8),
-                          topLeft: Radius.circular(8)),
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Center(
-                      child: path != null
-                          ? AppIcon.icon120(path: path!)
+                      child: iconPath != null
+                          ? AppIcon.icon64(path: iconPath!)
                           : const SizedBox(),
                     ),
                   ),
-                  Space.h16(),
-                  Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: context.textStyle.textMdBold.copyWith(
-                      color: context.color.primaryColor,
+                  if (title != null)
+                    Text(
+                      title!,
+                      textAlign: TextAlign.center,
+                      style: context.textStyle.textMdBold.copyWith(
+                        color: context.color.primary,
+                      ),
                     ),
-                  ),
                   Space.h5(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
                       description,
                       textAlign: TextAlign.center,
                       style: context.textStyle.textSmallMedium.copyWith(
-                        color: context.color.background,
+                        color: context.color.onSurface,
                       ),
                     ),
                   ),
-                  Space.h30(),
+                  Space.h16(),
+                  if (showButtonBottom) Space.h16(),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: showButtonBottom
                           ? Row(
                               children: [
-                                isMoreButton
+                                btNoName != null
                                     ? Flexible(
-                                        child: AppButton
-                                            .primaryLarge(
-                                                onPressed: () {
-                                                  callbackNoAction?.call();
-                                                },
-                                                label: btNoName ?? 'No'))
+                                        child: AppButton.primaryLarge(
+                                            onPressed: () {
+                                              callbackNoAction?.call();
+                                            },
+                                            label: btNoName!))
                                     : const SizedBox.shrink(),
-                                isMoreButton
+                                btNoName != null
                                     ? Space.w12()
                                     : const SizedBox.shrink(),
                                 Flexible(
@@ -110,22 +100,19 @@ class AppDialog extends StatelessWidget {
                               ],
                             )
                           : const SizedBox.shrink()),
-                  Space.h16(),
+                  if (showButtonBottom) Space.h16(),
                 ],
               ),
-              showBtClose
+              showButtonClose
                   ? Positioned(
                       top: -15,
                       right: -15,
-                      child: Container(
+                      child: SizedBox(
                         width: 24.0,
                         height: 24.0,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromRGBO(0, 0, 0, 0.4)),
-                        child: const Icon(
+                        child: Icon(
                           Icons.close,
-                          color: Colors.white,
+                          color: context.color.onSurfaceVariant,
                           size: 20,
                         ),
                       ),
@@ -137,12 +124,12 @@ class AppDialog extends StatelessWidget {
   }
 
   factory AppDialog.popupFail(
-      {required String description, VoidCallback? callback}) =>
+          {required String description, VoidCallback? callback}) =>
       AppDialog(
           callback: callback,
-          path: '',
+          iconPath: '',
           title: 'Localization.current.lbl_error',
           showButtonBottom: false,
-          showBtClose: true,
+          showButtonClose: true,
           description: description);
 }

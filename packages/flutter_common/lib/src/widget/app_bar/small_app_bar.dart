@@ -1,12 +1,11 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
-import '../../../flutter_common.dart';
-
 class SmallAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? leadingIcon;
   final String? title;
   final Widget? widgetTitle;
   final Gradient? gradient;
+  final Color? titleColor;
   final VoidCallback? onBackPressed;
 
   const SmallAppBar({
@@ -14,6 +13,7 @@ class SmallAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leadingIcon,
     this.title,
     this.gradient,
+    this.titleColor,
     this.widgetTitle,
     this.onBackPressed,
   }) : super(key: key);
@@ -24,33 +24,32 @@ class SmallAppBar extends StatelessWidget implements PreferredSizeWidget {
       height: 88,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       alignment: Alignment.bottomCenter,
-      decoration: BoxDecoration(
-          color: context.color.black01
-      ),
+      decoration: BoxDecoration(gradient: gradient),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GestureDetector(
-              onTap: () {
-                if (onBackPressed != null) {
-                  onBackPressed!.call();
-                } else {
-                  Navigator.maybePop(context);
-                }
-              },
-              child: leadingIcon != null
-                  ? AppIcon.icon24(path: leadingIcon!)
-                  : const SizedBox.shrink(),
-             ),
+            onTap: () {
+              if (onBackPressed != null) {
+                onBackPressed!.call();
+              } else {
+                Navigator.maybePop(context);
+              }
+            },
+            child: leadingIcon != null
+                ? AppIcon.icon24(path: leadingIcon!)
+                : const SizedBox.shrink(),
+          ),
           Space.w8(),
           Expanded(
-            child: widgetTitle ?? Text(
-              title ?? '',
-              textAlign: TextAlign.center,
-              style: context.textStyle.textMdBold.copyWith(
-                color: context.color.lightGray,
-              ),
-            ),
+            child: widgetTitle ??
+                Text(
+                  title ?? '',
+                  textAlign: TextAlign.center,
+                  style: context.textStyle.textMdBold.copyWith(
+                    color: titleColor ?? context.color.onPrimary,
+                  ),
+                ),
           ),
           Space.w16(),
         ],
