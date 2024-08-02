@@ -17,3 +17,5 @@ export 'src/space/space.dart';
 export 'src/base_state.dart';
 export 'src/base_widget.dart';
 export 'src/list_view/list_view_custom.dart';
+
+export 'src/theme/guideline_colors.dart';

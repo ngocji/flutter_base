@@ -11,6 +11,7 @@ class AppDialog extends StatelessWidget {
   final bool showButtonBottom;
   final VoidCallback? callback;
   final VoidCallback? callbackNoAction;
+  final bool cancelable;
 
   const AppDialog(
       {super.key,
@@ -20,6 +21,7 @@ class AppDialog extends StatelessWidget {
       this.icon,
       this.showButtonClose = false,
       this.showButtonBottom = true,
+      this.cancelable = true,
       this.title,
       required this.description,
       this.callbackNoAction,
@@ -29,7 +31,7 @@ class AppDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (showButtonClose) {
+        if (cancelable) {
           Navigator.maybePop(context);
         }
       },
@@ -83,7 +85,10 @@ class AppDialog extends StatelessWidget {
                                 btNoName != null
                                     ? AppButton.text(
                                         label: btNoName!,
-                                        textStyle: context.textTheme.bodyMedium?.copyWith(color: context.color.onSurfaceVariant),
+                                        textStyle: context.textTheme.bodyMedium
+                                            ?.copyWith(
+                                                color: context
+                                                    .color.onSurfaceVariant),
                                         onPressed: () {
                                           Navigator.maybePop(context);
                                         },
@@ -111,16 +116,21 @@ class AppDialog extends StatelessWidget {
                   ? Positioned(
                       top: -10,
                       right: -10,
-                      child: Container(
-                        width: 24.0,
-                        height: 24.0,
-                        decoration: BoxDecoration(
-                            color: context.color.surface,
-                            shape: BoxShape.circle),
-                        child: Icon(
-                          Icons.close,
-                          color: context.color.onSurfaceVariant,
-                          size: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.maybePop(context);
+                        },
+                        child: Container(
+                          width: 24.0,
+                          height: 24.0,
+                          decoration: BoxDecoration(
+                              color: context.color.surface,
+                              shape: BoxShape.circle),
+                          child: Icon(
+                            Icons.close,
+                            color: context.color.onSurfaceVariant,
+                            size: 20,
+                          ),
                         ),
                       ),
                     )

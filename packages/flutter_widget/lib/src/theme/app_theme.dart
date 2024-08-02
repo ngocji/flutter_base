@@ -66,10 +66,10 @@ class AppTheme {
             bodyMedium: TextStyle(fontSize: 14, color: colorSchema.onSurface),
             bodySmall:
                 TextStyle(fontSize: 12, color: colorSchema.onSurfaceVariant)),
-        extensions: const [
-          AppTypography(),
-          GuidelineColor(),
-          GuidelineTypography(
+        extensions: [
+          const AppTypography(),
+          GuidelineColor(toolbarGradient: SupportColors.supportGradientBlue),
+          const GuidelineTypography(
             displayMdRegular: GuidelineTextStyle.displayMdRegular,
             displayMdMedium: GuidelineTextStyle.displayMdMedium,
             displayMdSemiBold: GuidelineTextStyle.displayMdSemiBold,
@@ -157,10 +157,10 @@ class AppTheme {
             bodyMedium: TextStyle(fontSize: 14, color: colorSchema.onSurface),
             bodySmall:
             TextStyle(fontSize: 12, color: colorSchema.onSurfaceVariant)),
-        extensions: const [
-          AppTypography(),
-          GuidelineColor(),
-          GuidelineTypography(
+        extensions: [
+          const AppTypography(),
+          GuidelineColor(toolbarGradient: SupportColors.supportGradientBlack),
+          const GuidelineTypography(
             displayMdRegular: GuidelineTextStyle.displayMdRegular,
             displayMdMedium: GuidelineTextStyle.displayMdMedium,
             displayMdSemiBold: GuidelineTextStyle.displayMdSemiBold,

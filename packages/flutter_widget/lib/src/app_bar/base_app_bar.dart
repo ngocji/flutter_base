@@ -35,7 +35,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: automaticallyImplyLeading,
       title: Text(
         title ?? '',
-        style: context.textStyle.textMdBold.copyWith(
+        style: context.textStyle.textLgSemiBold.copyWith(
           color: context.color.onPrimary,
         ),
       ),
@@ -72,6 +72,26 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  factory BaseAppBar.onlyText({
+    String? title,
+    bool? centerTitle = true,
+    double elevation = 0,
+    Color? shadowColor,
+    Color? surfaceTintColor,
+    Color? backgroundColor,
+    Color? foregroundColor}) {
+    return BaseAppBar(
+      title: title,
+      centerTitle: centerTitle,
+      backgroundColor: backgroundColor,
+      shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
+      foregroundColor: foregroundColor,
+      elevation: elevation,
+      automaticallyImplyLeading: false,
+    );
+  }
 
   factory BaseAppBar.onlyBack({
     String? title,

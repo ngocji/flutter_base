@@ -1,8 +1,9 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
 class GuidelineColor extends ThemeExtension<GuidelineColor> {
+  Gradient toolbarGradient;
 
-  const GuidelineColor();
+  GuidelineColor({required this.toolbarGradient});
 
   @override
   ThemeExtension<GuidelineColor> lerp(

@@ -54,6 +54,7 @@ class AppButton extends StatelessWidget {
         disabled ? bgColor : colorBorder ?? type.borderColor(context);
 
     return GestureDetector(
+      radius: radius,
       onTap: () => disabled ? null : onPressed?.call(),
       child: Container(
           padding: padding,

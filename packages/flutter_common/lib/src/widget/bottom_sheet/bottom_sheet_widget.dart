@@ -88,7 +88,7 @@ class BottomSheetHeaderWrapper extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.close,
-                      color: context.color.onSurface.withOpacity(80),
+                      color: context.color.onSurface.withOpacity(0.8),
                       size: 24,
                     ),
                   ),

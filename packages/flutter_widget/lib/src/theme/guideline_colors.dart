@@ -106,6 +106,24 @@ class SupportColors {
       Color.fromRGBO(255, 255, 255, 0.78), //#E1FFE6
     ],
   );
+
+  static const Gradient supportGradientBlue = LinearGradient(
+    begin: Alignment(0.98, -0.22),
+    end: Alignment(-0.98, 0.22),
+    colors: [
+      Color.fromRGBO(33, 150, 243, 1.0), //#006C32
+      Color.fromRGBO(144, 202, 249, 1.0), //#BDD753
+    ],
+  ); //#DA2128
+
+  static const Gradient supportGradientBlack = LinearGradient(
+    begin: Alignment(0.98, -0.22),
+    end: Alignment(-0.98, 0.22),
+    colors: [
+      Color.fromRGBO(18, 18, 18, 1.0), //#006C32
+      Color.fromRGBO(48, 48, 48, 1.0), //#BDD753
+    ],
+  ); //#DA2128
 }
 
 class BlackColors {

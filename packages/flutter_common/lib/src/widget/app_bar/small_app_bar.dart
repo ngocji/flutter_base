@@ -1,6 +1,6 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
-class SmallAppBar extends StatelessWidget implements PreferredSizeWidget {
+class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? leadingIcon;
   final String? title;
   final Widget? widgetTitle;
@@ -8,7 +8,7 @@ class SmallAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? titleColor;
   final VoidCallback? onBackPressed;
 
-  const SmallAppBar({
+  const GradientAppBar({
     Key? key,
     this.leadingIcon,
     this.title,
@@ -21,14 +21,15 @@ class SmallAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 88,
+      height: preferredSize.height,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       alignment: Alignment.bottomCenter,
-      decoration: BoxDecoration(gradient: gradient),
+      decoration: BoxDecoration(gradient: gradient ?? context.colorExtend.toolbarGradient),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GestureDetector(
+            isCircle: true,
             onTap: () {
               if (onBackPressed != null) {
                 onBackPressed!.call();
@@ -42,11 +43,10 @@ class SmallAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           Space.w8(),
           Expanded(
-            child: widgetTitle ??
-                Text(
+            child: widgetTitle ?? Text(
                   title ?? '',
                   textAlign: TextAlign.center,
-                  style: context.textStyle.textMdBold.copyWith(
+                  style: context.textStyle.textLgSemiBold.copyWith(
                     color: titleColor ?? context.color.onPrimary,
                   ),
                 ),
