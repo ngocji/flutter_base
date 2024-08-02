@@ -4,6 +4,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? leadingIcon;
   final String? title;
   final Widget? widgetTitle;
+  final Color? backgroundColor;
   final Gradient? gradient;
   final Color? titleColor;
   final VoidCallback? onBackPressed;
@@ -16,6 +17,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleColor,
     this.widgetTitle,
     this.onBackPressed,
+    this.backgroundColor
   }) : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
       height: preferredSize.height,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       alignment: Alignment.bottomCenter,
-      decoration: BoxDecoration(gradient: gradient ?? context.colorExtend.toolbarGradient),
+      decoration: BoxDecoration(gradient: gradient, color: backgroundColor),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -46,8 +48,8 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: widgetTitle ?? Text(
                   title ?? '',
                   textAlign: TextAlign.center,
-                  style: context.textStyle.textLgSemiBold.copyWith(
-                    color: titleColor ?? context.color.onPrimary,
+                  style: context.textTheme.titleLarge?.copyWith(
+                    color: titleColor ?? context.color.onSurface,
                   ),
                 ),
           ),

@@ -1,11 +1,10 @@
 import 'package:flutter_widget/flutter_widget.dart';
 import 'package:flutter_widget/src/theme/guideline_color.dart';
-import 'package:flutter_widget/src/theme/guideline_colors.dart';
 import 'package:flutter_widget/src/theme/guideline_typography.dart';
 
 import 'guideline_text_style.dart';
 
-const _font = 'OpenSans';
+const _font = 'Roboto';
 
 class AppTheme {
   final ThemeData data;
@@ -57,15 +56,7 @@ class AppTheme {
         buttonTheme: const ButtonThemeData(
           textTheme: ButtonTextTheme.primary,
         ),
-        textTheme: TextTheme(
-            displayLarge: TextStyle(fontSize: 100, color: colorSchema.primary),
-            titleLarge: TextStyle(fontSize: 30, color: colorSchema.primary),
-            titleMedium:
-                TextStyle(fontSize: 20, color: colorSchema.onSecondary),
-            titleSmall: TextStyle(fontSize: 16, color: colorSchema.onTertiary),
-            bodyMedium: TextStyle(fontSize: 14, color: colorSchema.onSurface),
-            bodySmall:
-                TextStyle(fontSize: 12, color: colorSchema.onSurfaceVariant)),
+        textTheme: _createDefaultTextTheme(colorSchema),
         extensions: [
           const AppTypography(),
           GuidelineColor(toolbarGradient: SupportColors.supportGradientBlue),
@@ -148,15 +139,7 @@ class AppTheme {
         fontFamily: _font,
         brightness: Brightness.dark,
         colorScheme: colorSchema,
-        textTheme: TextTheme(
-            displayLarge: TextStyle(fontSize: 100, color: colorSchema.primary),
-            titleLarge: TextStyle(fontSize: 30, color: colorSchema.primary),
-            titleMedium:
-            TextStyle(fontSize: 20, color: colorSchema.onSecondary),
-            titleSmall: TextStyle(fontSize: 16, color: colorSchema.onTertiary),
-            bodyMedium: TextStyle(fontSize: 14, color: colorSchema.onSurface),
-            bodySmall:
-            TextStyle(fontSize: 12, color: colorSchema.onSurfaceVariant)),
+        textTheme: _createDefaultTextTheme(colorSchema),
         extensions: [
           const AppTypography(),
           GuidelineColor(toolbarGradient: SupportColors.supportGradientBlack),
@@ -198,17 +181,95 @@ class AppTheme {
       ),
     );
   }
+
+  static TextTheme _createDefaultTextTheme(ColorScheme colorSchema) {
+    return const TextTheme(
+      displayLarge: TextStyle(
+        fontSize: 57.0,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -0.25,
+      ),
+      displayMedium: TextStyle(
+        fontSize: 45.0,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -0.25,
+      ),
+      displaySmall: TextStyle(
+        fontSize: 36.0,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -0.25,
+      ),
+      headlineLarge: TextStyle(
+        fontSize: 32.0,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -0.25,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 28.0,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -0.25,
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 24.0,
+        fontWeight: FontWeight.bold,
+        letterSpacing: -0.25,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 22.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: -0.25,
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: -0.15,
+      ),
+      titleSmall: TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: -0.1,
+      ),
+      bodyLarge: TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.normal,
+        letterSpacing: -0.5,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.normal,
+        letterSpacing: -0.25,
+      ),
+      bodySmall: TextStyle(
+        fontSize: 12.0,
+        fontWeight: FontWeight.normal,
+        letterSpacing: -0.25,
+      ),
+      labelLarge: TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: -0.1,
+      ),
+      labelMedium: TextStyle(
+        fontSize: 12.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: -0.1,
+      ),
+      labelSmall: TextStyle(
+        fontSize: 11.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: -0.1,
+      ),
+    );
+  }
 }
 
 extension ThemeContext on BuildContext {
   ColorScheme get color => Theme.of(this).colorScheme;
 
-  GuidelineColor get colorExtend =>
-      Theme.of(this).extension<GuidelineColor>()!;
+  GuidelineColor get colorExtend => Theme.of(this).extension<GuidelineColor>()!;
 
   GuidelineTypography get textStyle =>
       Theme.of(this).extension<GuidelineTypography>()!;
 
-  TextTheme get textTheme =>
-      Theme.of(this).textTheme;
+  TextTheme get textTheme => Theme.of(this).textTheme;
 }

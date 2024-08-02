@@ -35,8 +35,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: automaticallyImplyLeading,
       title: Text(
         title ?? '',
-        style: context.textStyle.textLgSemiBold.copyWith(
-          color: context.color.onPrimary,
+        style: context.textTheme.titleLarge?.copyWith(
+          color: context.color.onSurface,
         ),
       ),
       centerTitle: centerTitle,
@@ -44,7 +44,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: elevation,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
-      backgroundColor: backgroundColor ?? context.color.primary,
+      backgroundColor: backgroundColor ?? context.color.surface,
       foregroundColor: foregroundColor,
     );
   }
@@ -57,7 +57,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     return IconButton(
       icon: Icon(
         Icons.arrow_back_rounded,
-        color: context.color.onPrimary,
+        color: context.color.onSurface,
         size: 24,
       ),
       onPressed: () {
@@ -150,7 +150,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(
             Icons.more_vert_rounded,
-            color: context.color.onPrimary,
+            color: context.color.onSurface,
             size: 24,
           ),
         )

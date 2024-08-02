@@ -1,8 +1,7 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
-// todo working appbutton
 class AppButton extends StatelessWidget {
-  static const double DEFAULT_RADIUS = 38;
+  static const double DEFAULT_RADIUS = 100;
 
   final AppButtonType type;
   final VoidCallback? onPressed;
@@ -297,7 +296,7 @@ enum AppButtonType {
   }
 
   TextStyle labelStyle(BuildContext context) {
-    return context.textStyle.textMdBold;
+    return context.textTheme.labelLarge ?? context.textStyle.textMdBold;
   }
 
   Color borderColor(BuildContext context) {
