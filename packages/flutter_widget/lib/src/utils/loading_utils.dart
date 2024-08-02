@@ -10,7 +10,7 @@ Widget showLoading(bool isShowLoading) {
     if (GetIt.instance.isRegistered<CommonLoadingWidget>()) {
       return GetIt.instance<CommonLoadingWidget>();
     }
-    return const WidgetWithLoading();
+    return const LottieLoadingWidget();
   }
-  return Container();
+  return const AppLoading();
 }

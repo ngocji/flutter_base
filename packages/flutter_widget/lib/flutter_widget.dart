@@ -3,6 +3,7 @@ library flutter_widget;
 export 'package:flutter/material.dart' hide GestureDetector;
 export 'package:shimmer/shimmer.dart';
 export 'package:flutter_svg_provider/flutter_svg_provider.dart';
+// export 'package:lottie/lottie.dart';
 
 export 'src/app_bar/base_app_bar.dart';
 export 'src/app_button/app_button.dart';
@@ -17,5 +18,5 @@ export 'src/space/space.dart';
 export 'src/base_state.dart';
 export 'src/base_widget.dart';
 export 'src/list_view/list_view_custom.dart';
-
 export 'src/theme/guideline_colors.dart';
+export 'src/bottom_bar/base_bottom_bar.dart';

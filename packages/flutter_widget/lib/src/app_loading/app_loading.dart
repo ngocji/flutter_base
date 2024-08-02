@@ -1,10 +1,10 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
 class AppLoading extends StatelessWidget {
-  factory AppLoading.centerLoading({double height = 24}) =>
+  factory AppLoading.centerLoading({double height = 48}) =>
       AppLoading(height: height);
 
-  const AppLoading({Key? key, this.height = 24}) : super(key: key);
+  const AppLoading({Key? key, this.height = 48}) : super(key: key);
   final double? height;
 
   @override
@@ -15,7 +15,7 @@ class AppLoading extends StatelessWidget {
         height: height,
         child: CircularProgressIndicator(
           color: context.color.onPrimaryContainer,
-          backgroundColor: context.color.primaryContainer,
+          backgroundColor: Colors.transparent,
           strokeWidth: 2,
         ),
       ),

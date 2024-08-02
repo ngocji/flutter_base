@@ -48,6 +48,7 @@ class AppTheme {
     );
     return AppTheme(
       data: ThemeData(
+        useMaterial3: true,
         fontFamily: _font,
         brightness: Brightness.light,
         colorScheme: colorSchema,
@@ -101,6 +102,7 @@ class AppTheme {
     );
     return AppTheme(
       data: ThemeData(
+        useMaterial3: true,
         fontFamily: _font,
         brightness: Brightness.dark,
         colorScheme: colorSchema,
