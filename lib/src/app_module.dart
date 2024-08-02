@@ -59,7 +59,7 @@ class AppModule extends Module {
     ]);
 
     // todo register service here
-    sl.registerLazySingleton(()=>ApiService(dio: sl.get<Dio>()));
+    sl.registerLazySingleton(() => ApiService(dio: sl.get<Dio>()));
   }
 
   void _setupDatabase(GetIt sl) {
