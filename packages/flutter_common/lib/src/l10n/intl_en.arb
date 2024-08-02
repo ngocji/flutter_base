@@ -1,1 +1,7 @@
-{}
+{
+  "yes": "Yes",
+  "cancel": "Cancel",
+  "error": "Error",
+  "confirm": "Confirm",
+  "ok": "Ok"
+}

@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
       theme: AppTheme.light().data,
       darkTheme: AppTheme.dark().data,
       locale: const Locale('en'),
-      supportedLocales: const AppLocalizationDelegate().supportedLocales,
+      supportedLocales: LocalizationDelegate.supportedLocales,
       localizationsDelegates: LocalizationDelegate.delegates,
       initialRoute: SplashScreen.routeName,
       onGenerateRoute: generateRoute,

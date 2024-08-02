@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: AppButton.primary(
             label: "Button",
             onPressed: () {
-              showDialogFail(context, Exception(), () {});
+              showDialogFail(context, Exception("Null data"), () {});
             },
           ),
         ));

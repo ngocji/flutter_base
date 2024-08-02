@@ -1,3 +1,4 @@
+import 'package:flutter_common/flutter_common.dart';
 import 'package:flutter_widget/flutter_widget.dart';
 
 class AppDialog extends StatelessWidget {
@@ -98,7 +99,8 @@ class AppDialog extends StatelessWidget {
                                     ? Space.w20()
                                     : const SizedBox.shrink(),
                                 AppButton.primary(
-                                  label: btYesName ?? "Ok",
+                                  label: btYesName ??
+                                      CommonLocalization.current.ok,
                                   isLargeButton: false,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30),
@@ -144,10 +146,49 @@ class AppDialog extends StatelessWidget {
           {required String description, VoidCallback? callback}) =>
       AppDialog(
           callback: callback,
-          title: 'Localization.current.lbl_error',
+          title: CommonLocalization.current.error,
           showButtonBottom: true,
-          btYesName: "Ok",
-          btNoName: "Cancel",
-          showButtonClose: true,
-          description: description);
+          btYesName: CommonLocalization.current.ok,
+          description: description,
+          cancelable: false);
+
+  factory AppDialog.popupConfirm(
+          {String? title,
+          required String description,
+          VoidCallback? yesCallback,
+          VoidCallback? noCallback,
+          String? btYesName,
+          String? btNoName,
+          bool cancelable = true,
+          String? icon}) =>
+      AppDialog(
+        title: title ?? CommonLocalization.current.confirm,
+        description: description,
+        btYesName: btYesName ?? CommonLocalization.current.yes,
+        btNoName: btNoName ?? CommonLocalization.current.cancel,
+        cancelable: cancelable,
+        callback: yesCallback,
+        callbackNoAction: noCallback,
+        iconPath: icon,
+      );
+
+  factory AppDialog.popup(
+          {String? title,
+          required String description,
+          VoidCallback? yesCallback,
+          VoidCallback? noCallback,
+          String? btYesName,
+          String? btNoName,
+          bool cancelable = true,
+          String? icon}) =>
+      AppDialog(
+        title: title,
+        description: description,
+        btYesName: btYesName,
+        btNoName: btNoName,
+        cancelable: cancelable,
+        callback: yesCallback,
+        callbackNoAction: noCallback,
+        iconPath: icon,
+      );
 }

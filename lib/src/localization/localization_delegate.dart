@@ -1,13 +1,14 @@
+import 'package:flutter_common/flutter_common.dart';
 import 'package:flutter_widget/flutter_widget.dart';
 
-import '../generated/l10n.dart';
+import '../generated/l10n.dart' as app;
 
 class LocalizationDelegate {
-  // todo check localizationDelegate
   static const List<LocalizationsDelegate> delegates = [
-    // GlobalMaterialLocalizations.delegate,
-    // GlobalWidgetsLocalizations.delegate,
-    // GlobalCupertinoLocalizations.delegate,
-    Localization.delegate
+    CommonLocalization.delegate,
+    app.Localization.delegate
   ];
+
+  static List<Locale> supportedLocales =
+      const app.AppLocalizationDelegate().supportedLocales;
 }
