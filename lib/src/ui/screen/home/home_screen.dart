@@ -22,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Center(
           child: AppButton.primary(
             label: "Button",
+            icon: Assets.icons.icArrowDown.path,
+            iconGravity: AppButtonIconGravity.textStart,
             onPressed: () {
               showDialogFail(context, Exception("Null data"), () {});
             },

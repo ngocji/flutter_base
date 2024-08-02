@@ -8,32 +8,51 @@ class AppIcon extends StatelessWidget {
   final double? height;
   final Color? color;
 
-  const AppIcon({
-    Key? key,
-    required this.path,
-    this.package,
-    this.width,
-    this.height,
-    this.color
-  }) : super(key: key);
+  const AppIcon(
+      {Key? key,
+      required this.path,
+      this.package,
+      this.width,
+      this.height,
+      this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return path.contains('.png')
-        ? Image.asset(path,
+        ? Image.asset(
+            path,
             package: 'flutter_common',
             width: width,
             height: height,
-            fit: BoxFit.fitWidth)
+            fit: BoxFit.fitWidth,
+            color: color,
+          )
         : SvgPicture.asset(
             path,
             width: width,
             height: height,
-            colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn),
+            colorFilter: color == null
+                ? null
+                : ColorFilter.mode(color!, BlendMode.srcIn),
             package: package ?? 'flutter_common',
             theme: SvgTheme(currentColor: color ?? const Color(0xFF000000)),
           );
   }
+
+  factory AppIcon.iconInfinity({required String path, Color? color}) => AppIcon(
+        path: path,
+        width: double.infinity,
+        height: double.infinity,
+        color: color,
+      );
+
+  factory AppIcon.icon10({required String path, Color? color}) => AppIcon(
+        path: path,
+        width: 10,
+        height: 10,
+        color: color,
+      );
 
   factory AppIcon.icon16({required String path, Color? color}) => AppIcon(
         path: path,
@@ -113,9 +132,9 @@ class AppIcon extends StatelessWidget {
       );
 
   factory AppIcon.icon57({required String path, Color? color}) => AppIcon(
-    path: path,
-    width: 57,
-    height: 57,
-    color: color,
-  );
+        path: path,
+        width: 57,
+        height: 57,
+        color: color,
+      );
 }

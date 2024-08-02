@@ -101,7 +101,7 @@ class AppDialog extends StatelessWidget {
                                 AppButton.primary(
                                   label: btYesName ??
                                       CommonLocalization.current.ok,
-                                  isLargeButton: false,
+                                  isFillWidth: false,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30),
                                   onPressed: () {
