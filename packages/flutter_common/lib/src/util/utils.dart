@@ -29,10 +29,13 @@ void showDialogConfirm(BuildContext context,
     String? btYesName,
     String? btNoName,
     bool cancelable = true,
-    String? icon}) {
+    Widget? icon,
+    String? iconPath,
+    Color? iconColor}) {
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
+    barrierLabel: "",
     pageBuilder: (BuildContext mContext, Animation<double> animation,
         Animation<double> secondaryAnimation) {
       return AppDialog.popupConfirm(
@@ -44,23 +47,29 @@ void showDialogConfirm(BuildContext context,
         btNoName: btNoName,
         cancelable: cancelable,
         icon: icon,
+        iconPath: iconPath,
+        iconColor: iconColor,
       );
     },
   );
 }
 
-void showDialog(BuildContext context,
+void showDialogCustom(BuildContext context,
     {String? title,
-      required String description,
-      VoidCallback? yesCallback,
-      VoidCallback? noCallback,
-      String? btYesName,
-      String? btNoName,
-      bool cancelable = true,
-      String? icon}) {
+    required String description,
+    VoidCallback? yesCallback,
+    VoidCallback? noCallback,
+    String? btYesName,
+    String? btNoName,
+    bool cancelable = true,
+    Widget? icon,
+    String? iconPath,
+    Color? iconColor,
+    Widget? content}) {
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
+    barrierLabel: "",
     pageBuilder: (BuildContext mContext, Animation<double> animation,
         Animation<double> secondaryAnimation) {
       return AppDialog.popup(
@@ -72,6 +81,9 @@ void showDialog(BuildContext context,
         btNoName: btNoName,
         cancelable: cancelable,
         icon: icon,
+        iconPath: iconPath,
+        iconColor: iconColor,
+        content: content,
       );
     },
   );

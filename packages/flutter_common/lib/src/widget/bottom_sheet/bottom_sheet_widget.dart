@@ -72,9 +72,9 @@ class BottomSheetHeaderWrapper extends StatelessWidget {
                     child: Text(
                       title,
                       textAlign: TextAlign.center,
-                      style: context.textStyle.textMdBold.copyWith(
-                        color: context.color.onSurface,
-                      ),
+                      // style: context.textStyle.textMdBold.copyWith(
+                      //   color: context.color.onSurface,
+                      // ),
                     ),
                   ),
                   GestureDetector(

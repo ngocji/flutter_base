@@ -1,4 +1,6 @@
 import 'package:flutter_widget/flutter_widget.dart';
+import 'package:flutter_widget/src/theme/guideline_text_style.dart';
+import 'package:flutter_widget/src/theme/guideline_typography.dart';
 
 class AppButton extends StatelessWidget {
   static const double defaultRadius = 100;
@@ -7,20 +9,24 @@ class AppButton extends StatelessWidget {
 
   final AppButtonType type;
   final VoidCallback? onPressed;
-  final String? iconPath;
   final String label;
   final double radius;
   final double? strokeWidth;
   final double? height;
-  final double? sizeIcon;
   final bool isFillWidth;
+
   final Color? colorBg;
-  final Color? colorIcon;
   final Color? colorBorder;
+  final Color? labelColor;
+
   final TextStyle? textStyle;
   final EdgeInsets? padding;
   final bool disabled;
   final bool isDecoration;
+
+  final String? iconPath;
+  final double? iconSize;
+  final Color? iconColor;
   final AppButtonIconGravity iconGravity;
   final MainAxisAlignment mainAxisAlignment;
 
@@ -28,20 +34,21 @@ class AppButton extends StatelessWidget {
       {Key? key,
       this.type = AppButtonType.other,
       this.onPressed,
-      this.iconPath,
       this.radius = defaultRadius,
       this.strokeWidth,
       this.padding,
       this.colorBg,
       this.colorBorder,
+      this.labelColor,
       this.textStyle,
       required this.label,
       this.isDecoration = true,
-      this.colorIcon,
-      this.sizeIcon,
+      this.iconSize,
       this.height,
       this.isFillWidth = true,
       this.disabled = false,
+      this.iconPath,
+      this.iconColor,
       this.iconGravity = AppButtonIconGravity.start,
       this.mainAxisAlignment = MainAxisAlignment.center})
       : super(key: key);
@@ -80,7 +87,7 @@ class AppButton extends StatelessWidget {
     if (iconPath != null &&
         (iconGravity == AppButtonIconGravity.top ||
             iconGravity == AppButtonIconGravity.bottom)) {
-      h += (sizeIcon ?? 18) + 10;
+      h += (iconSize ?? 18) + 10;
     }
     return h;
   }
@@ -176,21 +183,21 @@ class AppButton extends StatelessWidget {
   Widget _buildIcon(BuildContext context, String? path) {
     return path != null
         ? Container(
-            width: sizeIcon ?? 18,
-            height: sizeIcon ?? 18,
+            width: iconSize ?? 18,
+            height: iconSize ?? 18,
             padding: const EdgeInsets.all(3),
             child: AppIcon.iconInfinity(
               path: path,
               color: disabled
                   ? type.labelColorDisabled(context)
-                  : colorIcon ?? type.labelColor(context),
+                  : iconColor ?? type.labelColor(context),
             ),
           )
         : const SizedBox.shrink();
   }
 
   Widget _buildSpaceIcon() {
-    return SizedBox(width: sizeIcon ?? 18, height: sizeIcon ?? 18);
+    return SizedBox(width: iconSize ?? 18, height: iconSize ?? 18);
   }
 
   Widget _buildText(BuildContext context) {
@@ -201,53 +208,39 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  factory AppButton.primary(
-      {required String label,
-      VoidCallback? onPressed,
-      String? icon,
-      double? sizeIcon,
-      bool disabled = false,
-      AppButtonIconGravity? iconGravity,
-      double radius = defaultRadius,
-      bool isFillWidth = false,
-      EdgeInsets? padding,
-      TextStyle? textStyle}) {
+  factory AppButton.type({
+    required AppButtonType type,
+    required String label,
+    VoidCallback? onPressed,
+    String? icon,
+    double? sizeIcon,
+    bool disabled = false,
+    AppButtonIconGravity? iconGravity,
+    bool isFullWidth = false,
+    EdgeInsets? padding,
+    TextStyle? textStyle,
+    Color? colorBg,
+    Color? colorBorder,
+    Color? labelColor,
+    double? strokeWidth,
+    double? radius
+  }) {
     return AppButton(
-      type: AppButtonType.primary,
+      type: type,
       label: label,
       iconPath: icon,
       iconGravity: iconGravity ?? AppButtonIconGravity.textStart,
       onPressed: onPressed,
       disabled: disabled,
-      sizeIcon: sizeIcon,
-      radius: radius,
-      isFillWidth: isFillWidth,
+      iconSize: sizeIcon,
+      isFillWidth: isFullWidth,
       padding: padding,
       textStyle: textStyle,
-    );
-  }
-
-  factory AppButton.text(
-      {required String label,
-      VoidCallback? onPressed,
-      String? icon,
-      double? sizeIcon,
-      bool disabled = false,
-      AppButtonIconGravity? iconGravity,
-      bool isLargeButton = false,
-      EdgeInsets? padding,
-      TextStyle? textStyle}) {
-    return AppButton(
-      type: AppButtonType.text,
-      label: label,
-      iconPath: icon,
-      iconGravity: iconGravity ?? AppButtonIconGravity.textStart,
-      onPressed: onPressed,
-      disabled: disabled,
-      sizeIcon: sizeIcon,
-      isFillWidth: isLargeButton,
-      padding: padding,
-      textStyle: textStyle,
+      colorBg: colorBg,
+      colorBorder: colorBorder,
+      labelColor: labelColor,
+      strokeWidth: strokeWidth,
+      radius: radius ?? defaultRadius,
     );
   }
 }
@@ -329,7 +322,7 @@ enum AppButtonType {
   }
 
   TextStyle labelStyle(BuildContext context) {
-    return context.textTheme.labelLarge ?? context.textStyle.textMdBold;
+    return context.textTheme.labelLarge ?? GuidelineTextStyle.textMdBold;
   }
 
   Color borderColor(BuildContext context) {

@@ -75,9 +75,9 @@ class AppListTile extends StatelessWidget {
   Widget _showDescription(BuildContext context) {
     return Text(
       description ?? '',
-      style: descriptionStyle ??
-          context.textStyle.textMdMedium
-              .copyWith(color: context.color.onSurface, fontSize: 14),
+      // style: descriptionStyle ??
+          // context.textStyle.textMdMedium
+          //     .copyWith(color: context.color.onSurface, fontSize: 14),
     );
   }
 
@@ -119,11 +119,11 @@ class AppListTile extends StatelessWidget {
       AppListTile(
         paddingPrefix: const EdgeInsets.fromLTRB(0, 3, 8, 0),
         title: title,
-        titleStyle: context.textStyle.textMdBold
-            .copyWith(fontSize: 24, color: context.color.primary),
+        // titleStyle: context.textStyle.textMdBold
+        //     .copyWith(fontSize: 24, color: context.color.primary),
         description: description,
-        descriptionStyle: context.textStyle.textSmallRegular
-            .copyWith(fontSize: 14, color: context.color.primary),
+        // descriptionStyle: context.textStyle.textSmallRegular
+        //     .copyWith(fontSize: 14, color: context.color.primary),
         prefixIcon: prefix,
         colorPrefixIcon: context.color.primary,
         iconType: IconType.small,
@@ -189,9 +189,9 @@ class AppListTile extends StatelessWidget {
     return Text(
       maxLines: 2,
       title ?? '',
-      style: titleStyle ??
-          context.textStyle.textMdMedium
-              .copyWith(color: context.color.onSurface, fontSize: 14),
+      // style: titleStyle ??
+      //     context.textStyle.textMdMedium
+      //         .copyWith(color: context.color.onSurface, fontSize: 14),
     );
   }
 

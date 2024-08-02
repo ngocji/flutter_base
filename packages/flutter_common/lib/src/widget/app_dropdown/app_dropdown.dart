@@ -38,8 +38,8 @@ class _AppDropdownState extends State<AppDropdown> {
                     Expanded(
                       child: Text(
                         widget.hint ?? "",
-                        style: context.textStyle.textMdRegular
-                            .copyWith(color: context.color.onSurface),
+                        // style: GuidelineTextStyle.textMdRegular
+                        //     .copyWith(color: context.color.onSurface),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -51,8 +51,8 @@ class _AppDropdownState extends State<AppDropdown> {
                     value: item,
                     child: Text(
                       item,
-                      style: context.textStyle.textMdRegular
-                          .copyWith(color: item == selectedValue ? context.color.primary : context.color.onSurface),
+                      // style: context.textStyle.textMdRegular
+                      //     .copyWith(color: item == selectedValue ? context.color.primary : context.color.onSurface),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ))

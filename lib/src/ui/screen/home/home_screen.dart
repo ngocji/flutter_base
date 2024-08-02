@@ -20,12 +20,14 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
         ),
         body: Center(
-          child: AppButton.primary(
+          child: AppButton.type(
+            type: AppButtonType.primary,
             label: "Button",
             icon: Assets.icons.icArrowDown.path,
             iconGravity: AppButtonIconGravity.textStart,
             onPressed: () {
-              showDialogFail(context, Exception("Null data"), () {});
+              showDialogConfirm(context, description: "Aadkjsfasdf" ,
+              iconPath: Assets.icons.icClosePopup.path);
             },
           ),
         ));
