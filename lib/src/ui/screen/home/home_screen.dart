@@ -79,7 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView.builder(
         itemBuilder: (context, index) {
           return Center(
-            child: Text("$index"),
+            child: AppIconButton.outline(
+              icon: Icons.add,
+              onPressed: () {},
+            ),
           );
         },
         onPageChanged: _onPageChanged,

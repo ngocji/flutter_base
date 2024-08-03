@@ -1,6 +1,5 @@
 import 'package:flutter_widget/flutter_widget.dart';
 import 'package:flutter_widget/src/theme/guideline_text_style.dart';
-import 'package:flutter_widget/src/theme/guideline_typography.dart';
 
 class AppButton extends StatelessWidget {
   static const double defaultRadius = 100;
@@ -31,7 +30,7 @@ class AppButton extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
 
   const AppButton(
-      {Key? key,
+      {super.key,
       this.type = AppButtonType.other,
       this.onPressed,
       this.radius = defaultRadius,
@@ -50,8 +49,7 @@ class AppButton extends StatelessWidget {
       this.iconPath,
       this.iconColor,
       this.iconGravity = AppButtonIconGravity.start,
-      this.mainAxisAlignment = MainAxisAlignment.center})
-      : super(key: key);
+      this.mainAxisAlignment = MainAxisAlignment.center});
 
   @override
   Widget build(BuildContext context) {
