@@ -1,4 +1,7 @@
 {
   "@@locale": "en",
-  "app_name": "ContactFly"
+  "app_name": "ContactFly",
+  "home": "Home",
+  "favorite": "Favorite",
+  "settings": "Settings"
 }
