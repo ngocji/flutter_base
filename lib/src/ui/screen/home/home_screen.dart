@@ -41,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BaseBottomBar.normal(
           index: _index,
           icons: [
-            BottomBarItem(icon: Assets.icons.icClosePopup.path, label: "Home"),
+            BottomBarItem(icon: Icons.home_outlined, label: "Home"),
             BottomBarItem(
-                icon: Assets.icons.icClosePopup.path, label: "Favorite"),
+                icon: Icons.favorite_outline_rounded, label: "Favorite"),
           ],
           onChanged: (index) => {_onPageChanged(index)}),
     );

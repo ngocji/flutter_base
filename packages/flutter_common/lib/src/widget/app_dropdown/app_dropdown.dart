@@ -81,7 +81,7 @@ class _AppDropdownState extends State<AppDropdown> {
                 width: 14,
                 height: 14,
                 child: AppIcon(
-                  path: Assets.icons.icArrowDown.path,
+                  path: "Assets.icons.icArrowDown.path",
                   color: widget.textColor,
                 )),
             iconSize: 14,

@@ -1,51 +1,64 @@
+import 'package:flutter_core/flutter_core.dart';
+
 import '../../flutter_widget.dart';
 
 class BottomBarItem {
-  final String icon;
+  final dynamic icon;
+  final dynamic selectedIcon;
   final String label;
 
-  BottomBarItem({required this.icon, required this.label});
+  BottomBarItem({required this.icon, required this.label, this.selectedIcon});
 }
 
 class BaseBottomBar extends StatelessWidget {
-  final int index;
+  final int selectedIndex;
   final Color? backgroundColor;
+  final Color? indicatorColor;
   final List<BottomBarItem> icons;
   final Color? iconColor;
-  final bool showLabel;
+  final NavigationDestinationLabelBehavior behavior;
+  final double? elevation;
   final Function(int index) onChanged;
 
   const BaseBottomBar(
       {super.key,
-      required this.index,
+      required this.selectedIndex,
       this.backgroundColor,
       required this.icons,
       this.iconColor,
-      this.showLabel = true,
+      this.elevation,
+      this.behavior = NavigationDestinationLabelBehavior.alwaysShow,
+      this.indicatorColor,
       required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: backgroundColor ?? context.color.surfaceContainer,
-      currentIndex: index,
-      onTap: (index) {
-        onChanged(index);
-      },
-      showSelectedLabels: showLabel,
-      showUnselectedLabels: showLabel,
-      items: icons.map((icon) {
-        return BottomNavigationBarItem(
-          icon: AppIcon.icon24(path: icon.icon),
-          label: icon.label, // Add label if needed
-        );
-      }).toList(),
-    );
+    return NavigationBar(
+        selectedIndex: selectedIndex,
+        backgroundColor: backgroundColor ?? context.color.surfaceContainer,
+        elevation: elevation,
+        labelBehavior: behavior,
+        onDestinationSelected: onChanged,
+        indicatorColor: indicatorColor ?? context.color.secondaryContainer,
+        destinations: icons
+            .mapIndexed((item, index) => NavigationDestination(
+                  selectedIcon: item.selectedIcon != null
+                      ? AppIcon.icon24(path: item.selectedIcon ?? item.icon)
+                      : null,
+                  icon: AppIcon.icon24(
+                    path: item.icon,
+                    color: item.selectedIcon == null && selectedIndex == index
+                        ? context.color.onSecondaryContainer
+                        : context.color.onSurfaceVariant,
+                  ),
+                  label: item.label,
+                ))
+            .toList());
   }
 
   factory BaseBottomBar.normal(
           {required int index,
           required List<BottomBarItem> icons,
           required Function(int index) onChanged}) =>
-      BaseBottomBar(index: index, icons: icons, onChanged: onChanged);
+      BaseBottomBar(selectedIndex: index, icons: icons, onChanged: onChanged);
 }

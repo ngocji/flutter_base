@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: sl<NavigationService>().navigatorKey,
       title: 'Base',
       // todo: edit title project
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       theme: AppTheme.light().data,
       darkTheme: AppTheme.dark().data,
       locale: const Locale('en'),
