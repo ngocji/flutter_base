@@ -1,6 +1,8 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget/flutter_widget.dart';
 
+import 'asset_icon.dart';
+
 class AppIcon extends StatelessWidget {
   final dynamic path;
   final String? package;
@@ -17,14 +19,12 @@ class AppIcon extends StatelessWidget {
       this.color})
       : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return path is IconData
-        ? Icon(path, size: width, color: color)
-        : path.contains('.png')
+  Widget _buildImagePath(dynamic path, String? package) {
+    return path is String
+        ? path.contains('.png')
             ? Image.asset(
                 path,
-                package: 'flutter_common',
+                package: package,
                 width: width,
                 height: height,
                 fit: BoxFit.fitWidth,
@@ -37,12 +37,23 @@ class AppIcon extends StatelessWidget {
                 colorFilter: color == null
                     ? null
                     : ColorFilter.mode(color!, BlendMode.srcIn),
-                package: package ?? 'flutter_common',
+                package: package,
                 theme: SvgTheme(currentColor: color ?? const Color(0xFF000000)),
-              );
+              )
+        : const SizedBox.shrink();
   }
 
-  factory AppIcon.iconInfinity({required dynamic path, Color? color}) => AppIcon(
+  @override
+  Widget build(BuildContext context) {
+    return path is IconData
+        ? Icon(path, size: width, color: color)
+        : path is AssetIcon
+            ? _buildImagePath((path as AssetIcon).path, (path as AssetIcon).package)
+            : _buildImagePath(path, package);
+  }
+
+  factory AppIcon.iconInfinity({required dynamic path, Color? color}) =>
+      AppIcon(
         path: path,
         width: double.infinity,
         height: double.infinity,

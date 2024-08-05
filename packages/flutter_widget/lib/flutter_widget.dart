@@ -8,6 +8,8 @@ export 'package:flutter_svg_provider/flutter_svg_provider.dart';
 export 'src/app_bar/base_app_bar.dart';
 export 'src/app_button/app_button.dart';
 export 'src/app_icon/app_icon.dart';
+export 'src/app_icon/asset_icon.dart';
+
 export 'src/app_loading/app_loading.dart';
 export 'src/app_loading/app_loading_overlay.dart';
 export 'src/container/card_container.dart';
