@@ -57,9 +57,9 @@ class AppDatabaseHelper {
 
   Stream<List<T>?> queryStream<T>(QueryOptions<T> options) {
     if (!_controllers.containsKey(options)) {
-      _controllers[options] = StreamController<T?>.broadcast(
-        onListen: () {
-          _controllers[options]?.add(query(options));
+      _controllers[options] = StreamController<List<T>?>.broadcast(
+        onListen: () async {
+          _controllers[options]?.add(await query(options));
         },
       );
     }
