@@ -25,6 +25,9 @@ class BaseNavigationBarDrawer extends StatelessWidget {
   final Color? indicatorColor;
   final List<NavigationBarDrawerGroup> groups;
   final Color? iconColor;
+  final Color? textColor;
+  final Color? iconSelectedColor;
+  final Color? textSelectedColor;
   final double? elevation;
   final Widget? header;
   final bool showDivider;
@@ -35,6 +38,9 @@ class BaseNavigationBarDrawer extends StatelessWidget {
       this.backgroundColor,
       required this.groups,
       this.iconColor,
+      this.iconSelectedColor,
+      this.textColor,
+      this.textSelectedColor,
       this.elevation,
       this.indicatorColor,
       this.header,
@@ -65,10 +71,18 @@ class BaseNavigationBarDrawer extends StatelessWidget {
       if (group.items.isNotEmpty) {
         group.items.forEachIndexed((item, index) {
           widgets.add(NavigationDrawerDestination(
-              icon: AppIcon.icon24(path: item.icon),
+              icon: AppIcon.icon24(
+                path: item.icon,
+                color: item.index == selectedIndex
+                    ? iconSelectedColor ?? context.color.onSecondaryContainer
+                    : iconColor ?? context.color.onSurfaceVariant,
+              ),
               label: Text(item.label,
-                  style: context.textTheme.labelLarge
-                      ?.copyWith(color: context.color.onSurfaceVariant))));
+                  style: context.textTheme.labelLarge?.copyWith(
+                      color: item.index == selectedIndex
+                          ? textSelectedColor ??
+                              context.color.onSecondaryContainer
+                          : textColor ?? context.color.onSurfaceVariant))));
         });
 
         if (showDivider && index < groups.length - 1) {
