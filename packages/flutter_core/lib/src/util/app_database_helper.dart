@@ -41,16 +41,18 @@ class AppDatabaseHelper {
 
   Future<List<T>> query<T>(QueryOptions<T> options) async {
     var db = await getDatabase();
-    var list = await db.query(options.table,
-        distinct: options.distinct,
-        columns: options.columns,
-        where: options.where,
-        whereArgs: options.whereArgs,
-        groupBy: options.groupBy,
-        having: options.having,
-        orderBy: options.orderBy,
-        limit: options.limit,
-        offset: options.offset);
+    var list = options.rawQuery != null
+        ? await db.rawQuery(options.rawQuery!)
+        : await db.query(options.table,
+            distinct: options.distinct,
+            columns: options.columns,
+            where: options.where,
+            whereArgs: options.whereArgs,
+            groupBy: options.groupBy,
+            having: options.having,
+            orderBy: options.orderBy,
+            limit: options.limit,
+            offset: options.offset);
 
     return list.map(options.mapper).toList();
   }
@@ -149,20 +151,21 @@ class QueryOptions<T> {
   final String? orderBy;
   final int? limit;
   final int? offset;
+  final String? rawQuery;
 
-  QueryOptions({
-    required this.table,
-    required this.mapper,
-    this.distinct,
-    this.columns,
-    this.where,
-    this.whereArgs,
-    this.groupBy,
-    this.having,
-    this.orderBy,
-    this.limit,
-    this.offset,
-  });
+  QueryOptions(
+      {required this.table,
+      required this.mapper,
+      this.distinct,
+      this.columns,
+      this.where,
+      this.whereArgs,
+      this.groupBy,
+      this.having,
+      this.orderBy,
+      this.limit,
+      this.offset,
+      this.rawQuery});
 
   @override
   bool operator ==(Object other) {
@@ -179,7 +182,8 @@ class QueryOptions<T> {
         other.having == having &&
         other.orderBy == orderBy &&
         other.limit == limit &&
-        other.offset == offset;
+        other.offset == offset &&
+        other.rawQuery == rawQuery;
   }
 
   @override
@@ -194,6 +198,7 @@ class QueryOptions<T> {
         having.hashCode ^
         orderBy.hashCode ^
         limit.hashCode ^
-        offset.hashCode;
+        offset.hashCode ^
+        rawQuery.hashCode;
   }
 }
