@@ -12,4 +12,6 @@ extension DateTimeEx on DateTime {
       return null;
     }
   }
+  
+  static int get currentTimeInMillis => DateTime.now().millisecond;
 }
