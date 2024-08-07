@@ -13,7 +13,8 @@ class AppDatabaseHelper {
   final OnDatabaseVersionChangeFn? onDowngrade;
   final Function(Database db)? onOpen;
 
-  final Map<dynamic, StreamController<dynamic>> _controllers = {};
+  final Map<dynamic, StreamController<List<Map<String, dynamic>>>>
+      _controllers = {};
 
   AppDatabaseHelper(
       {required this.dbName,
@@ -57,16 +58,37 @@ class AppDatabaseHelper {
     return list.map(options.mapper).toList();
   }
 
-  Stream<List<T>?> queryStream<T>(QueryOptions<T> options) {
+  Future<List<Map<String, dynamic>>> query2<T>(QueryOptions<T> options) async {
+    var db = await getDatabase();
+    var list = options.rawQuery != null
+        ? await db.rawQuery(options.rawQuery!)
+        : await db.query(options.table,
+            distinct: options.distinct,
+            columns: options.columns,
+            where: options.where,
+            whereArgs: options.whereArgs,
+            groupBy: options.groupBy,
+            having: options.having,
+            orderBy: options.orderBy,
+            limit: options.limit,
+            offset: options.offset);
+
+    return list;
+  }
+
+  Stream<List<T>> createStream<T>(QueryOptions<T> options) {
     if (!_controllers.containsKey(options)) {
-      _controllers[options] = StreamController<List<T>?>.broadcast(
+      _controllers[options] =
+          StreamController<List<Map<String, dynamic>>>.broadcast(
         onListen: () async {
-          _controllers[options]?.add(await query(options));
+          _controllers[options]?.add(await query2(options));
         },
       );
     }
 
-    return _controllers[options]?.stream as Stream<List<T>?>;
+    var stream =
+        _controllers[options]?.stream as Stream<List<Map<String, dynamic>>>;
+    return stream.map((list) => list.map(options.mapper).toList());
   }
 
   Future<int> update(String table, Map<String, dynamic> data, String where,
@@ -104,16 +126,16 @@ class AppDatabaseHelper {
   }
 
   void _notifyControllers(String table, String action) async {
-    _controllers.forEach((options, controller) {
+    _controllers.forEach((options, controller) async {
       if (options.table == table) {
-        controller.add(query(options));
+        controller.add(await query2(options));
       }
     });
   }
 
   void _notifyAllControllers() async {
-    _controllers.forEach((options, controller) {
-      controller.add(query(options));
+    _controllers.forEach((options, controller) async {
+      controller.add(await query2(options));
     });
   }
 
