@@ -7,4 +7,6 @@ extension StringExtension on String? {
     final regex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
     return regex.hasMatch(this ?? '');
   }
+
+  String get firstCharOrEmpty => orEmpty.isEmpty ? '' : orEmpty[0];
 }
