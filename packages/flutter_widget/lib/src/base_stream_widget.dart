@@ -1,13 +1,13 @@
 import 'package:flutter_widget/flutter_widget.dart';
 
-class StreamWidget<T> extends StatelessWidget {
+class BaseStreamWidget<T> extends StatelessWidget {
   final Stream<T> stream;
   final AsyncWidgetBuilder<T> builder;
   final Widget? loadingWidget;
   final Widget? errorWidget;
   final Widget? emptyWidget;
 
-  const StreamWidget(
+  const BaseStreamWidget(
       {Key? key,
       required this.stream,
       required this.builder,

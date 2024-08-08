@@ -1,22 +1,18 @@
+import 'package:flutter_common/flutter_common.dart';
 import 'package:flutter_widget/flutter_widget.dart';
 
 class AppEmptyWidget extends StatelessWidget {
-  final IconData? icon;
-  final String? iconPath;
-  final String? iconPackageName;
+  final dynamic icon;
   final double? iconSize;
   final Color? iconColor;
   final String? emptyLabel;
 
   const AppEmptyWidget(
-      {Key? key,
-      this.icon,
-      this.iconPath,
-      this.iconPackageName,
-      this.iconSize = 64,
-      this.iconColor,
-      this.emptyLabel})
-      : super(key: key);
+      {super.key,
+        this.icon,
+        this.iconSize = 64,
+        this.iconColor,
+        this.emptyLabel});
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +22,18 @@ class AppEmptyWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           icon != null
-              ? Icon(icon,
-                  color: iconColor ?? Colors.transparent, size: iconSize ?? 64)
-              : iconPath != null
-                  ? AppIcon(
-                      path: iconPath!,
-                      package: iconPackageName,
-                      width: iconSize ?? 64,
-                      height: iconSize ?? 64,
-                      color: iconColor ?? Colors.transparent,
-                    )
-                  : const SizedBox.shrink(),
+              ? AppIcon(
+            path: icon,
+            width: iconSize,
+            height: iconSize,
+            color: iconColor ?? context.color.inverseSurface.withOpacity(0.6),
+          )
+              : const SizedBox.shrink(),
           Space.h4(),
           Text(
-            emptyLabel ?? "Empty!",
+            emptyLabel ?? CommonLocalization.current.empty,
             style: context.textTheme.bodyMedium
-                ?.copyWith(color: context.color.inverseSurface),
+                ?.copyWith(color: context.color.inverseSurface.withOpacity(0.6)),
           ),
         ],
       ),

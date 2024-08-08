@@ -25,5 +25,5 @@ export 'src/app_button/app_icon_button.dart';
 export 'src/app_icon/asset_icon.dart';
 export 'src/app_button/app_fab.dart';
 export 'src/utils/constants.dart';
-export 'src/stream_widget.dart';
+export 'src/base_stream_widget.dart';
 export 'src/utils/hex_color.dart';

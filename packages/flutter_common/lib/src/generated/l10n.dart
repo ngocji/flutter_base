@@ -99,6 +99,16 @@ class CommonLocalization {
       args: [],
     );
   }
+
+  /// `No data found!`
+  String get empty {
+    return Intl.message(
+      'No data found!',
+      name: 'empty',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate

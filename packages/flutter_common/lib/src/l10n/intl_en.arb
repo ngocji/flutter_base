@@ -3,5 +3,6 @@
   "cancel": "Cancel",
   "error": "Error",
   "confirm": "Confirm",
-  "ok": "Ok"
+  "ok": "Ok",
+  "empty": "No data found!"
 }
